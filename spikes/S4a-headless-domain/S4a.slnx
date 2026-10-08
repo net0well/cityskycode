@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CitySky.Spike.Domain/CitySky.Spike.Domain.csproj" />
+    <Project Path="src/CitySky.Spike.Bench/CitySky.Spike.Bench.csproj" />
+  </Folder>
+</Solution>

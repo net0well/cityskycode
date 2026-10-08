@@ -56,7 +56,7 @@ Sem felicidade (F7), a chegada usa só **moradia livre** e **vagas abertas**. A 
 ### E4 — Calibração e desempenho
 | ID | Tarefa | Onde | Depende de | Pronto quando |
 |---|---|---|---|---|
-| F5-30 | Mini-playtest interno da escala temporal: `R = 30`, `MobilitySpeedScale = 3`, cidade ≤ 1 km; ajustar e registrar | — | E1–E3 | decisão em `SIMULATION_TICK.md` §9 |
+| F5-30 | Mini-playtest interno da escala temporal: `R = 30`, `MobilitySpeedScale = 3`, cidade ≤ 1 km; ajustar e registrar. Incluir a **distribuição de horários**: o S4a mediu pico de 72% da população viajando ao mesmo tempo (média de 11%), em parte por horários sincronizados (todos acordam às 06:00). Variar turnos, acordar conforme o tempo de viagem, e medir a fração de viagens simultâneas média e de pico | — | E1–E3 | decisão em `SIMULATION_TICK.md` §9; pico de viagens simultâneas registrado e premissa do `PERFORMANCE.md` §2 atualizada |
 | F5-31 | Benchmark de domínio (BenchmarkDotNet) com 50, 1k e 10k cidadãos sintéticos; comparar com S4a/S4b | `dotnet/benchmarks` | E1, E2 | números registrados em `docs/perf/` |
 | F5-32 | Teste de independência da câmera: mesma cidade headless e em PlayMode com 3 trajetórias de câmera → hashes iguais | testes | F5-21 | verde |
 

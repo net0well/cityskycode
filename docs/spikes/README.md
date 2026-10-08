@@ -1,6 +1,6 @@
 # Spikes
 
-> **Status:** planos prontos, nenhum spike executado · **Data:** 2026-10-08 · Plataforma: **Windows** (ADR-0018)
+> **Status:** 1 de 10 concluído (S4a) · **Data:** 2026-10-08 · Plataforma: **Windows** (ADR-0018)
 > Spike = experimento curto, com prazo fixo, para responder **uma** pergunta de risco. O código de spike é **descartável**: fica em `spikes/<id>/` e nunca é copiado para `unity/` ou `dotnet/src/` sem ser reescrito.
 > Plano da fase: [`docs/phases/F00-research-and-spikes.md`](../phases/F00-research-and-spikes.md).
 
@@ -13,7 +13,7 @@ Primeiro o que não depende da Unity (dá para começar já), depois o que depen
 |---|---|---|---|---|---|---|
 | 1 | **S6** Sandbox Windows (Job Object + AppContainer/LPAC/token restrito, Worker .NET 10) | [S6](S6-sandbox-windows.md) | só .NET 10 | 3 d | S1a, S7, F1 | Planejado |
 | 2 | **S1a** Code Host: Roslyn compila → Worker executa com orçamentos | [S1a](S1a-codehost-pipeline.md) | S6 | 3 d | S1b, F1 | Planejado |
-| 3 | **S4a** Domínio headless: 100k cidadãos em SoA (.NET 10) | [S4a](S4a-headless-domain.md) | só .NET 10 | 2 d | S4b, F5 | Planejado |
+| 3 | **S4a** Domínio headless: 100k cidadãos em SoA (.NET 10) | [S4a](S4a-headless-domain.md) | só .NET 10 | 2 d | S4b, F5 | ✅ **Concluído** (0,055 ms/tick com 100k) |
 | 4 | **S2b** Janela PhotinoX + Monaco + completions do Roslyn | [S2b](S2b-photinox-monaco.md) | .NET 10 + Node | 2 d | S2a, F1 | Planejado |
 | 5 | **S1b** Player Unity IL2CPP ↔ Code Host (named pipe; fallback TCP) | [S1b](S1b-il2cpp-ipc.md) | Unity, S1a | 2 d | S7, F1 | Planejado |
 | 6 | **S2a** UnityWebBrowser no painel do jogo + **decisão do host** | [S2a](S2a-unitywebbrowser.md) | Unity, S2b | 2 d | F1 | Planejado |
@@ -37,8 +37,8 @@ Total estimado: **~23 dias de trabalho** de uma pessoa. Os spikes 1–4 rodam em
 | CWM.RoslynNavigator (dotnet-claude-kit) | ✅ 0.8.0. Rodar `dotnet tool update -g CWM.RoslynNavigator` |
 | **Unity Hub + Unity 6.6 com Windows Build Support (IL2CPP)** | ❌ **não instalado.** Necessário para S1b, S2a, S3, S4b e S5 |
 | **Conta Unity (licença Personal, gratuita)** | ⏳ criar e ativar no Unity Hub |
-| **Repositório Git** | ❌ a pasta ainda não é um repositório |
-| **Pasta fora do OneDrive** | ⚠️ o projeto está em `OneDrive\Desktop`. Unity (`Library/` com dezenas de milhares de arquivos) e Git dentro de pasta sincronizada causam lentidão, arquivos bloqueados e risco de corromper o `.git`. **Mover para, por exemplo, `C:\dev\cityskycode`** |
+| **Repositório Git** | ✅ https://github.com/net0well/cityskycode (branch `main`) |
+| **Pasta fora do OneDrive** | ✅ projeto em `C:\dev\cityskycode` (a cópia antiga em `OneDrive\Desktop\Estudos\cityskycode` pode ser apagada) |
 | **PC com GPU integrada (Intel Iris Xe ou similar)** | ❌ a máquina de desenvolvimento (Radeon RX 7600, 32 GB) está muito acima do mínimo. O S3 precisa de um notebook ou PC de escola real |
 | **VM Windows 10 22H2** (S6, S7) | ⏳ criar no Hyper-V (o Windows 11 Pro tem Hyper-V) |
 | **Usuário Windows padrão (sem admin)** para testes (S6, S7) | ⏳ criar |

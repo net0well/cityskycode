@@ -25,6 +25,8 @@ O perfil **mínimo foi confirmado** pelo dono do produto (ADR-0017). Como o jogo
 
 **Não assumir simulação individual completa para tudo** (§54): ver `SIMULATION_LOD.md` (camadas S0/S1/S2 independentes da câmera e R0–R3 por câmera).
 
+> **Premissa de viagens ativas em revisão (spike S4a, 2026-10-08):** com a escala temporal do ADR-0008, a cidade sintética de 100k teve **média de 11% e pico de 72%** da população viajando ao mesmo tempo (início da manhã), contra os ~20% da tabela. Parte do pico é artefato do gerador (horários sincronizados), mas o número real só sai da calibração da Fase 5 (F5-30). Até lá, a coluna "Viagens ativas" vale como **média**, e os sistemas por viagem (meso, agentes visíveis, limite de viagens concorrentes) precisam considerar picos de 3 a 4 vezes a média.
+
 ## 3. Orçamento de frame (Recomendado, 60 FPS = 16,6 ms)
 | Item | CPU main | Worker threads | GPU |
 |---|---:|---:|---:|
@@ -36,11 +38,13 @@ O perfil **mínimo foi confirmado** pelo dono do produto (ADR-0017). Como o jogo
 | Folga | ≥ 4 ms | — | ≥ 2 ms |
 
 Simulação por tick (alvos .NET 10, a medir também em Mono/IL2CPP):
-| Escala | ms/tick (médio) | Pior tick (pico de hora cheia) |
-|---|---:|---:|
-| MVP | ≤ 0,1 | ≤ 0,5 |
-| 10k | ≤ 0,5 | ≤ 2 |
-| 100k | ≤ 1,5 | ≤ 5 (fases defasadas evitam picos) |
+| Escala | ms/tick (médio) | Pior tick (pico de hora cheia) | Medido no S4a (.NET 10; agenda + viagens + necessidades + felicidade) |
+|---|---:|---:|---|
+| MVP | ≤ 0,1 | ≤ 0,5 | 1k: 0,001 médio / 0,05 pior |
+| 10k | ≤ 0,5 | ≤ 2 | 0,005 médio / 0,07 pior |
+| 100k | ≤ 1,5 | ≤ 5 (fases defasadas evitam picos) | **0,055 médio / 0,52 pior**, 0 B alocados, 8,3 MB de estado |
+
+Os números do S4a cobrem só os sistemas de população (sem pathfinding, economia, energia ou tráfego) e foram medidos numa CPU de 2014 (Xeon E5-2670 v3). A folga (~18× no médio) é o espaço para os demais sistemas. O fator Mono/IL2CPP vem do S4b ([relatório](spikes/S4a-headless-domain.md)).
 
 ## 4. Memória
 | Item | MVP | 100k |

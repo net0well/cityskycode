@@ -29,8 +29,8 @@ A arquitetura inteira se apoia em quatro apostas não verificadas: (1) um player
 ### 5.1 Preparação do ambiente
 | ID | Tarefa | Depende de | Pronto quando |
 |---|---|---|---|
-| F0-01 | **Mover o projeto para fora do OneDrive** (ex.: `C:\dev\cityskycode`). Unity `Library/` e `.git` dentro de pasta sincronizada causam lentidão, arquivos bloqueados e risco de corromper o repositório | — | pasta nova aberta no Claude Code; OneDrive sem cópia ativa |
-| F0-02 | `git init`, `.gitattributes` (LFS para binários, `*.cs text eol=lf`), `.gitignore` mínimo, commit `docs: initial phase 0 documentation` | F0-01 | `git log` mostra o commit; `git lfs env` ok |
+| F0-01 | ✅ **Mover o projeto para fora do OneDrive** (ex.: `C:\dev\cityskycode`). Unity `Library/` e `.git` dentro de pasta sincronizada causam lentidão, arquivos bloqueados e risco de corromper o repositório | — | pasta nova aberta no Claude Code; OneDrive sem cópia ativa. *Feito em 2026-10-08: cópia verificada em `C:\dev\cityskycode`; falta apagar a cópia antiga do OneDrive* |
+| F0-02 | ✅ `git init`, `.gitattributes` (LFS para binários, `*.cs text eol=lf`), `.gitignore` mínimo, commit `docs: initial phase 0 documentation` | F0-01 | `git log` mostra o commit; `git lfs env` ok. *Feito: https://github.com/net0well/cityskycode* |
 | F0-03 | **Decisões pendentes do dono do produto** (ver §5.3) registradas | — | respostas anotadas neste documento e, se for o caso, em ADR |
 | F0-04 | Unity Hub + **Unity 6.6** + *Windows Build Support (IL2CPP)*; conta Unity Personal ativada; Visual Studio 2026 com as cargas "Desenvolvimento de jogos com Unity" e "Desenvolvimento para desktop com C++" | — | projeto vazio gera player IL2CPP que abre |
 | F0-05 | `dotnet tool update -g CWM.RoslynNavigator`; dotnet-claude-kit instalado e atualizado | — | `/plugin` lista o kit; MCP responde |
@@ -42,7 +42,7 @@ A arquitetura inteira se apoia em quatro apostas não verificadas: (1) um player
 |---|---|---|---|---|---|
 | F0-10 | **S6** Sandbox Windows | [S6](../spikes/S6-sandbox-windows.md) | 3 d | F0-01 | F1 |
 | F0-11 | **S1a** Pipeline do Code Host | [S1a](../spikes/S1a-codehost-pipeline.md) | 3 d | S6 (launcher) | F1 |
-| F0-12 | **S4a** Domínio headless 100k | [S4a](../spikes/S4a-headless-domain.md) | 2 d | — | F5 |
+| F0-12 | ✅ **S4a** Domínio headless 100k (concluído: 0,055 ms/tick médio, 0,52 ms pior) | [S4a](../spikes/S4a-headless-domain.md) | 2 d | — | F5 |
 | F0-13 | **S2b** Janela PhotinoX + Monaco | [S2b](../spikes/S2b-photinox-monaco.md) | 2 d | — | F1 |
 | F0-14 | **S1b** IL2CPP ↔ Code Host | [S1b](../spikes/S1b-il2cpp-ipc.md) | 2 d | F0-04, S1a | F1 |
 | F0-15 | **S2a** UnityWebBrowser no painel | [S2a](../spikes/S2a-unitywebbrowser.md) | 2 d | F0-04, S2b | F1 |

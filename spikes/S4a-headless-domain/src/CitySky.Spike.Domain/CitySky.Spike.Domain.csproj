@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Perfil U (CODING_STANDARDS.md §3): mesmo alvo e linguagem do código compartilhado com a Unity.
+       O S4b importa esta pasta num asmdef da Unity sem mudanças. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>CitySky.Spike.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>
