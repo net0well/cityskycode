@@ -1,6 +1,6 @@
 # Spikes
 
-> **Status:** 1 de 10 concluído (S4a) · **Data:** 2026-10-08 · Plataforma: **Windows** (ADR-0018)
+> **Status:** 2 de 10 concluídos (S4a, S2b) · **Data:** 2026-10-08 · Plataforma: **Windows** (ADR-0018)
 > Spike = experimento curto, com prazo fixo, para responder **uma** pergunta de risco. O código de spike é **descartável**: fica em `spikes/<id>/` e nunca é copiado para `unity/` ou `dotnet/src/` sem ser reescrito.
 > Plano da fase: [`docs/phases/F00-research-and-spikes.md`](../phases/F00-research-and-spikes.md).
 
@@ -14,7 +14,7 @@ Primeiro o que não depende da Unity (dá para começar já), depois o que depen
 | 1 | **S6** Sandbox Windows (Job Object + AppContainer/LPAC/token restrito, Worker .NET 10) | [S6](S6-sandbox-windows.md) | só .NET 10 | 3 d | S1a, S7, F1 | Planejado |
 | 2 | **S1a** Code Host: Roslyn compila → Worker executa com orçamentos | [S1a](S1a-codehost-pipeline.md) | S6 | 3 d | S1b, F1 | Planejado |
 | 3 | **S4a** Domínio headless: 100k cidadãos em SoA (.NET 10) | [S4a](S4a-headless-domain.md) | só .NET 10 | 2 d | S4b, F5 | ✅ **Concluído** (0,055 ms/tick com 100k) |
-| 4 | **S2b** Janela PhotinoX + Monaco + completions do Roslyn | [S2b](S2b-photinox-monaco.md) | .NET 10 + Node | 2 d | S2a, F1 | Planejado |
+| 4 | **S2b** Janela PhotinoX + Monaco + completions do Roslyn | [S2b](S2b-photinox-monaco.md) | .NET 10 + Node | 2 d | S2a, F1 | ✅ **Concluído** (editor embutido no painel direito; ADR-0019) |
 | 5 | **S1b** Player Unity IL2CPP ↔ Code Host (named pipe; fallback TCP) | [S1b](S1b-il2cpp-ipc.md) | Unity, S1a | 2 d | S7, F1 | Planejado |
 | 6 | **S2a** UnityWebBrowser no painel do jogo + **decisão do host** | [S2a](S2a-unitywebbrowser.md) | Unity, S2b | 2 d | F1 | Planejado |
 | 7 | **S3** Orçamento de renderização URP (5k prédios, 20k árvores, 1k agentes) | [S3](S3-urp-render-budget.md) | Unity + **PC com GPU integrada** | 3 d | gate F2 | Planejado |
@@ -35,8 +35,8 @@ Total estimado: **~23 dias de trabalho** de uma pessoa. Os spikes 1–4 rodam em
 | WebView2 Runtime (PhotinoX no Windows) | ✅ 154 |
 | Visual Studio 2026 Community | ✅ instalado. **Confirmar as cargas de trabalho** "Desenvolvimento de jogos com Unity" e "Desenvolvimento para desktop com C++" (o IL2CPP exige o compilador C++ da Microsoft) |
 | CWM.RoslynNavigator (dotnet-claude-kit) | ✅ 0.8.0. Rodar `dotnet tool update -g CWM.RoslynNavigator` |
-| **Unity Hub + Unity 6.6 com Windows Build Support (IL2CPP)** | ❌ **não instalado.** Necessário para S1b, S2a, S3, S4b e S5 |
-| **Conta Unity (licença Personal, gratuita)** | ⏳ criar e ativar no Unity Hub |
+| **Unity Hub + Unity 6.6 com Windows Build Support (IL2CPP)** | ✅ Unity Hub 3.22.2 (MSIX) + Unity **6000.6.5f1** com IL2CPP em `C:\Unity\Editor` |
+| **Conta Unity (licença Personal, gratuita)** | ❌ **não ativada**: o modo batch falha com "0 free entitlements". Bloqueia S1b, S2a, S3, S4b e S5. **Ação do dono do produto:** abrir o Unity Hub → entrar com a conta Unity → Preferências → Licenças → Adicionar → licença Personal gratuita |
 | **Repositório Git** | ✅ https://github.com/net0well/cityskycode (branch `main`) |
 | **Pasta fora do OneDrive** | ✅ projeto em `C:\dev\cityskycode` (a cópia antiga em `OneDrive\Desktop\Estudos\cityskycode` pode ser apagada) |
 | **PC com GPU integrada (Intel Iris Xe ou similar)** | ❌ a máquina de desenvolvimento (Radeon RX 7600, 32 GB) está muito acima do mínimo. O S3 precisa de um notebook ou PC de escola real |

@@ -32,7 +32,7 @@ A arquitetura inteira se apoia em quatro apostas não verificadas: (1) um player
 | F0-01 | ✅ **Mover o projeto para fora do OneDrive** (ex.: `C:\dev\cityskycode`). Unity `Library/` e `.git` dentro de pasta sincronizada causam lentidão, arquivos bloqueados e risco de corromper o repositório | — | pasta nova aberta no Claude Code; OneDrive sem cópia ativa. *Feito em 2026-10-08: cópia verificada em `C:\dev\cityskycode`; falta apagar a cópia antiga do OneDrive* |
 | F0-02 | ✅ `git init`, `.gitattributes` (LFS para binários, `*.cs text eol=lf`), `.gitignore` mínimo, commit `docs: initial phase 0 documentation` | F0-01 | `git log` mostra o commit; `git lfs env` ok. *Feito: https://github.com/net0well/cityskycode* |
 | F0-03 | **Decisões pendentes do dono do produto** (ver §5.3) registradas | — | respostas anotadas neste documento e, se for o caso, em ADR |
-| F0-04 | Unity Hub + **Unity 6.6** + *Windows Build Support (IL2CPP)*; conta Unity Personal ativada; Visual Studio 2026 com as cargas "Desenvolvimento de jogos com Unity" e "Desenvolvimento para desktop com C++" | — | projeto vazio gera player IL2CPP que abre |
+| F0-04 | Unity Hub + **Unity 6.6** + *Windows Build Support (IL2CPP)*; conta Unity Personal ativada; Visual Studio 2026 com as cargas "Desenvolvimento de jogos com Unity" e "Desenvolvimento para desktop com C++" | — | projeto vazio gera player IL2CPP que abre. *2026-10-09: Unity 6000.6.5f1 + IL2CPP instalada e VS com C++ confirmado; **falta ativar a licença Personal** (ação do dono do produto)* |
 | F0-05 | `dotnet tool update -g CWM.RoslynNavigator`; dotnet-claude-kit instalado e atualizado | — | `/plugin` lista o kit; MCP responde |
 | F0-06 | Conseguir um **PC com GPU integrada** (Intel Iris Xe ou similar, 8 GB): notebook emprestado ou PC de escola parceira | — | máquina disponível por 3 dias para o S3 |
 | F0-07 | Conta **Microsoft Partner Center** individual (gratuita, com verificação de identidade) | — | nome do app reservado (provisório) |
@@ -43,7 +43,7 @@ A arquitetura inteira se apoia em quatro apostas não verificadas: (1) um player
 | F0-10 | **S6** Sandbox Windows | [S6](../spikes/S6-sandbox-windows.md) | 3 d | F0-01 | F1 |
 | F0-11 | **S1a** Pipeline do Code Host | [S1a](../spikes/S1a-codehost-pipeline.md) | 3 d | S6 (launcher) | F1 |
 | F0-12 | ✅ **S4a** Domínio headless 100k (concluído: 0,055 ms/tick médio, 0,52 ms pior) | [S4a](../spikes/S4a-headless-domain.md) | 2 d | — | F5 |
-| F0-13 | **S2b** Janela PhotinoX + Monaco | [S2b](../spikes/S2b-photinox-monaco.md) | 2 d | — | F1 |
+| F0-13 | ✅ **S2b** PhotinoX + Monaco (concluído: editor embutido no painel direito, ADR-0019) | [S2b](../spikes/S2b-photinox-monaco.md) | 2 d | — | F1 |
 | F0-14 | **S1b** IL2CPP ↔ Code Host | [S1b](../spikes/S1b-il2cpp-ipc.md) | 2 d | F0-04, S1a | F1 |
 | F0-15 | **S2a** UnityWebBrowser no painel | [S2a](../spikes/S2a-unitywebbrowser.md) | 2 d | F0-04, S2b | F1 |
 | F0-16 | **S3** Orçamento de renderização URP | [S3](../spikes/S3-urp-render-budget.md) | 3 d | F0-04, F0-06 | gate F2 |
@@ -58,7 +58,7 @@ A documentação não define estes pontos, e eles afetam a Fase 1:
 
 | Pergunta | Por que importa | Opções |
 |---|---|---|
-| Repositório **público ou privado**? | GitHub Actions tem minutos ilimitados só em repositório público; assets da Asset Store **não podem** ser versionados em repositório público (`ASSET_PIPELINE.md` §5); repositório público expõe os testes ocultos dos desafios (aceitável: não há ranking) | público · privado · privado agora e público no lançamento |
+| ✅ Repositório **público ou privado**? **Decidido: privado** (github.com/net0well/cityskycode, 2026-10-08); assets gratuitos da Asset Store podem ser versionados enquanto for privado | GitHub Actions tem minutos ilimitados só em repositório público; assets da Asset Store **não podem** ser versionados em repositório público (`ASSET_PIPELINE.md` §5); repositório público expõe os testes ocultos dos desafios (aceitável: não há ranking) | público · privado · privado agora e público no lançamento |
 | **Licença do código** do projeto | define se terceiros podem contribuir, reutilizar ou revender; uma licença OSI torna o projeto elegível à assinatura gratuita da SignPath Foundation (hoje descartada, ADR-0017) | MIT/Apache-2.0 · GPL · proprietária (código fechado) |
 | Conta GitHub/organização | dona do repositório, dos *secrets* (licença Unity no CI) e do Partner Center | pessoal · organização |
 
