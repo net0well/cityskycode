@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CitySky.Spike.Runtime/CitySky.Spike.Runtime.csproj" />
+    <Project Path="src/CitySky.Spike.Contracts/CitySky.Spike.Contracts.csproj" />
+    <Project Path="src/CitySky.Spike.Worker/CitySky.Spike.Worker.csproj" />
+    <Project Path="src/CitySky.Spike.CodeHost/CitySky.Spike.CodeHost.csproj" />
+  </Folder>
+</Solution>

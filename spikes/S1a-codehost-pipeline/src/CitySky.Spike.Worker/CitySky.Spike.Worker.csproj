@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Processo descartável que executa o código do aluno (tratado como não confiável). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CitySky.Spike.Runtime\CitySky.Spike.Runtime.csproj" />
+    <ProjectReference Include="..\CitySky.Spike.Contracts\CitySky.Spike.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

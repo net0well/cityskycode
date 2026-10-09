@@ -1,6 +1,6 @@
 # Spikes
 
-> **Status:** 2 de 10 concluídos (S4a, S2b) · **Data:** 2026-10-08 · Plataforma: **Windows** (ADR-0018)
+> **Status:** 3 de 10 concluídos (S4a, S2b, S1a) · **Data:** 2026-10-08 · Plataforma: **Windows** (ADR-0018)
 > Spike = experimento curto, com prazo fixo, para responder **uma** pergunta de risco. O código de spike é **descartável**: fica em `spikes/<id>/` e nunca é copiado para `unity/` ou `dotnet/src/` sem ser reescrito.
 > Plano da fase: [`docs/phases/F00-research-and-spikes.md`](../phases/F00-research-and-spikes.md).
 
@@ -12,7 +12,7 @@ Primeiro o que não depende da Unity (dá para começar já), depois o que depen
 | Ordem | Spike | Plano | Depende de | Prazo | Bloqueia | Status |
 |---|---|---|---|---|---|---|
 | 1 | **S6** Sandbox Windows (Job Object + AppContainer/LPAC/token restrito, Worker .NET 10) | [S6](S6-sandbox-windows.md) | só .NET 10 | 3 d | S1a, S7, F1 | Planejado |
-| 2 | **S1a** Code Host: Roslyn compila → Worker executa com orçamentos | [S1a](S1a-codehost-pipeline.md) | S6 | 3 d | S1b, F1 | Planejado |
+| 2 | **S1a** Code Host: Roslyn compila → Worker executa com orçamentos | [S1a](S1a-codehost-pipeline.md) | S6 | 3 d | S1b, F1 | ✅ **Concluído** (10/10 do corpus; 39 ms p95) |
 | 3 | **S4a** Domínio headless: 100k cidadãos em SoA (.NET 10) | [S4a](S4a-headless-domain.md) | só .NET 10 | 2 d | S4b, F5 | ✅ **Concluído** (0,055 ms/tick com 100k) |
 | 4 | **S2b** Janela PhotinoX + Monaco + completions do Roslyn | [S2b](S2b-photinox-monaco.md) | .NET 10 + Node | 2 d | S2a, F1 | ✅ **Concluído** (editor embutido no painel direito; ADR-0019) |
 | 5 | **S1b** Player Unity IL2CPP ↔ Code Host (named pipe; fallback TCP) | [S1b](S1b-il2cpp-ipc.md) | Unity, S1a | 2 d | S7, F1 | Planejado |

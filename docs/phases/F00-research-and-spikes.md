@@ -41,7 +41,7 @@ A arquitetura inteira se apoia em quatro apostas não verificadas: (1) um player
 | ID | Spike | Plano | Prazo | Depende de | Bloqueia |
 |---|---|---|---|---|---|
 | F0-10 | **S6** Sandbox Windows | [S6](../spikes/S6-sandbox-windows.md) | 3 d | F0-01 | F1 |
-| F0-11 | **S1a** Pipeline do Code Host | [S1a](../spikes/S1a-codehost-pipeline.md) | 3 d | S6 (launcher) | F1 |
+| F0-11 | ✅ **S1a** Pipeline do Code Host (concluído: 10/10 do corpus; achados sobre `goto`, corpo-expressão, Debug e atributos de infra) | [S1a](../spikes/S1a-codehost-pipeline.md) | 3 d | — (L5 fica no S6) | F1 |
 | F0-12 | ✅ **S4a** Domínio headless 100k (concluído: 0,055 ms/tick médio, 0,52 ms pior) | [S4a](../spikes/S4a-headless-domain.md) | 2 d | — | F5 |
 | F0-13 | ✅ **S2b** PhotinoX + Monaco (concluído: editor embutido no painel direito, ADR-0019) | [S2b](../spikes/S2b-photinox-monaco.md) | 2 d | — | F1 |
 | F0-14 | **S1b** IL2CPP ↔ Code Host | [S1b](../spikes/S1b-il2cpp-ipc.md) | 2 d | F0-04, S1a | F1 |

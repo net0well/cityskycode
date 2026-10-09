@@ -56,3 +56,7 @@ playtest-data/
 spikes/**/wwwroot/
 # Logs de execução dos spikes
 spikes/**/results-run*.log
+# Dumps de resultado dos spikes (reproduzíveis); as capturas de tela ficam versionadas
+spikes/**/results/*.json
+spikes/**/results/*.log
+spikes/S1a-codehost-pipeline/**/*.pdb

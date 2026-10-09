@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Runtime de orçamento: referenciado pela compilação do aluno (só pelo código injetado) e carregado no Worker. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>CitySky.Runtime</RootNamespace>
+    <AssemblyName>CitySky.Spike.Runtime</AssemblyName>
+  </PropertyGroup>
+
+</Project>
