@@ -48,7 +48,7 @@ A arquitetura inteira se apoia em quatro apostas não verificadas: (1) um player
 | F0-15 | **S2a** UnityWebBrowser no painel | [S2a](../spikes/S2a-unitywebbrowser.md) | 2 d | F0-04, S2b | F1 |
 | F0-16 | **S3** Orçamento de renderização URP | [S3](../spikes/S3-urp-render-budget.md) | 3 d | F0-04, F0-06 | gate F2 |
 | F0-17 | ✅ **S4b** Fator Mono/IL2CPP (concluído: IL2CPP 1,34× o .NET 10; hash idêntico nos 4 runtimes; 0 alocação) | [S4b](../spikes/S4b-mono-il2cpp-factor.md) | 1 d | S4a, F0-04 | F5 |
-| F0-18 | **S5** Malha de ruas | [S5](../spikes/S5-road-mesh.md) | 3 d | F0-04 | F3 |
+| F0-18 | ✅ **S5** Malha de ruas (concluído: 12/12 configurações sem artefatos; 96 interseções em 1,4 ms; terreno inclinado e snapshot vão para a F3) | [S5](../spikes/S5-road-mesh.md) | 3 d | F0-04 | F3 |
 | F0-19 | **S7** MSIX + Microsoft Store | [S7](../spikes/S7-msix-store.md) | 2 d | S1b, S6, F0-07 | F1 |
 
 S6, S1a, S4a e S2b só precisam do .NET 10 e rodam enquanto a Unity é instalada.

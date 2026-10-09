@@ -1,0 +1,172 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='880' height='660' style='background:#0d141c;font-family:sans-serif'>
+<g transform='translate(0,0)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='110.0,110.0 117.5,102.5 117.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,102.5 117.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,117.5 102.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 117.5,117.5 102.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,102.5 200.0,102.5 117.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,117.5 200.0,102.5 200.0,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,102.5 102.5,20.0 117.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,102.5 102.5,20.0 117.5,20.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,117.5 20.0,117.5 102.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,102.5 20.0,117.5 20.0,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>T 90graus</text>
+</g>
+<g transform='translate(220,0)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='110.0,110.0 117.5,117.5 102.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 117.5,102.5 117.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,102.5 117.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,117.5 102.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,102.5 200.0,102.5 117.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,117.5 200.0,102.5 200.0,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,102.5 102.5,20.0 117.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,102.5 102.5,20.0 117.5,20.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,117.5 20.0,117.5 102.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,102.5 20.0,117.5 20.0,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,117.5 117.5,200.0 102.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,117.5 117.5,200.0 102.5,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>X 90graus (4 ramos)</text>
+</g>
+<g transform='translate(440,0)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='105.6,114.4 105.6,123.4 97.8,109.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='105.6,114.4 113.5,109.8 105.6,123.4' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='105.6,114.4 97.8,109.8 113.5,109.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='97.8,109.8 97.8,20.0 113.5,109.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='113.5,109.8 97.8,20.0 113.5,20.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='105.6,123.4 27.9,168.3 97.8,109.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='97.8,109.8 27.9,168.3 20.0,154.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='113.5,109.8 191.3,154.7 105.6,123.4' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='105.6,123.4 191.3,154.7 183.4,168.3' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>Y 30/150</text>
+</g>
+<g transform='translate(660,0)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='108.6,111.4 104.0,121.2 98.8,106.9' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='108.6,111.4 118.3,116.0 104.0,121.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='108.6,111.4 121.8,112.6 118.3,116.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='108.6,111.4 114.2,99.4 121.8,112.6' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='108.6,111.4 99.2,102.0 114.2,99.4' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='108.6,111.4 98.8,106.9 99.2,102.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='114.2,99.4 184.0,59.1 121.8,112.6' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='121.8,112.6 184.0,59.1 191.6,72.3' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='99.2,102.0 85.2,22.6 114.2,99.4' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='114.2,99.4 85.2,22.6 100.2,20.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='104.0,121.2 25.2,149.9 98.8,106.9' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='98.8,106.9 25.2,149.9 20.0,135.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='118.3,116.0 147.0,194.8 104.0,121.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='104.0,121.2 147.0,194.8 132.7,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>X assimetrico 30/100/200/290</text>
+</g>
+<g transform='translate(0,220)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='92.0,128.0 96.5,132.5 87.5,132.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='92.0,128.0 96.5,123.5 96.5,132.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='92.0,128.0 87.5,123.5 96.5,123.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='92.0,128.0 87.5,132.5 87.5,123.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='96.5,123.5 110.0,123.5 96.5,132.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='96.5,132.5 110.0,123.5 110.0,132.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='87.5,123.5 87.5,20.0 96.5,123.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='96.5,123.5 87.5,20.0 96.5,20.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='87.5,132.5 56.0,132.5 87.5,123.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='87.5,123.5 56.0,132.5 56.0,123.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='96.5,132.5 96.5,200.0 87.5,132.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='87.5,132.5 96.5,200.0 87.5,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>ramos de comprimentos diferentes</text>
+</g>
+<g transform='translate(220,220)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='162.1,46.1 200.0,46.1 162.1,69.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='162.1,69.7 200.0,46.1 200.0,69.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='162.1,69.7 20.0,69.7 162.1,46.1' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='162.1,46.1 20.0,69.7 20.0,46.1' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>segmento curto 16m entre 2 nos</text>
+</g>
+<g transform='translate(440,220)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='110.0,110.0 117.5,117.5 102.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 117.5,102.5 117.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,102.5 117.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,117.5 102.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,102.5 200.0,102.5 117.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,117.5 200.0,102.5 200.0,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,102.5 102.5,20.0 117.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,102.5 102.5,20.0 117.5,20.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,117.5 20.0,117.5 102.5,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,102.5 20.0,117.5 20.0,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,117.5 117.5,200.0 102.5,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,117.5 117.5,200.0 102.5,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>intersecao em rampa (plano no spike)</text>
+</g>
+<g transform='translate(660,220)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='110.0,110.0 117.5,116.8 102.5,116.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 116.2,102.0 117.5,116.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 103.8,102.0 116.2,102.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,110.0 102.5,116.8 103.8,102.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='116.2,102.0 198.7,94.7 117.5,116.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,116.8 198.7,94.7 200.0,109.6' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,116.8 20.0,109.6 103.8,102.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='103.8,102.0 20.0,109.6 21.3,94.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='117.5,116.8 117.5,199.7 102.5,116.8' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='102.5,116.8 117.5,199.7 102.5,199.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>3 ramos quase colineares 170graus</text>
+</g>
+<g transform='translate(0,440)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='101.1,118.9 101.1,129.7 90.5,117.1' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,118.9 131.8,127.2 101.1,129.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,118.9 131.8,110.7 131.8,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,118.9 123.6,96.4 131.8,110.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,118.9 104.1,107.7 123.6,96.4' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,118.9 89.8,115.9 104.1,107.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,118.9 90.5,117.1 89.8,115.9' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='131.8,110.7 200.0,110.7 131.8,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='131.8,127.2 200.0,110.7 200.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='123.6,96.4 182.6,62.3 131.8,110.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='131.8,110.7 182.6,62.3 190.9,76.6' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='89.8,115.9 44.5,37.4 104.1,107.7' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='104.1,107.7 44.5,37.4 58.8,29.1' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='101.1,129.7 30.6,188.8 90.5,117.1' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='90.5,117.1 30.6,188.8 20.0,176.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>4 ramos, um a 30graus do vizinho</text>
+</g>
+<g transform='translate(220,440)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='33.8,172.3 200.0,172.3 33.8,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='33.8,200.0 200.0,172.3 200.0,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>fim de linha (1 ramo)</text>
+</g>
+<g transform='translate(440,440)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='99.4,120.6 106.0,114.0 106.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='99.4,120.6 92.8,114.0 106.0,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='99.4,120.6 92.8,127.2 92.8,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='99.4,120.6 106.0,127.2 92.8,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='120.6,120.6 114.0,127.2 114.0,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='120.6,120.6 127.2,127.2 114.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='120.6,120.6 127.2,114.0 127.2,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='120.6,120.6 114.0,114.0 127.2,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='106.0,114.0 114.0,114.0 106.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='106.0,127.2 114.0,114.0 114.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='92.8,127.2 20.0,127.2 92.8,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='92.8,114.0 20.0,127.2 20.0,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='92.8,114.0 92.8,41.2 106.0,114.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='106.0,114.0 92.8,41.2 106.0,41.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='127.2,114.0 200.0,114.0 127.2,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='127.2,127.2 200.0,114.0 200.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='127.2,127.2 127.2,200.0 114.0,127.2' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='114.0,127.2 127.2,200.0 114.0,200.0' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>dois nos proximos (&gt;=16m)</text>
+</g>
+<g transform='translate(660,440)'>
+<rect x='2' y='2' width='216' height='216' fill='#111a24' stroke='#223142'/>
+<polygon points='110.0,102.5 200.0,102.5 110.0,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,117.5 200.0,102.5 200.0,117.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,117.5 20.0,117.5 110.0,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<polygon points='110.0,102.5 20.0,117.5 20.0,102.5' fill='#2a4a5f' stroke='#3cc2b0' stroke-width='0.5'/>
+<text x='8' y='212' fill='#8299ad' font-size='11'>passagem reta (2 ramos colineares)</text>
+</g>
+</svg>
