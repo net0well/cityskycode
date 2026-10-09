@@ -146,7 +146,8 @@ A tabela do briefing foi mantida, com **três correções** marcadas com ⚠️.
 | Candidato | Prós | Contras |
 |---|---|---|
 | **UnityWebBrowser** (MIT, CEF) | Gratuito, processo separado, JS↔.NET interop, integrado ao painel do jogo | CEF desatualizado (2.1.1, mar/2024, CEF 122), ~400 MB em repouso, manutenção incerta |
-| **Janela PhotinoX acoplada** (aberta pelo Code Host; Apache-2.0) | No Windows usa o **WebView2 Evergreen** (segurança atualizada pelo Windows, sem custo), IME e acessibilidade nativos, Chromium fora do processo da Unity; depois funciona em macOS/Linux sem reescrita (ADR-0018) | Duas janelas; jogo em modo janela/borderless; gestão de foco |
+| **WebView2 como janela-filha no painel direito** (Code Host, via PhotinoX 5.3.5 Apache-2.0 ou SDK oficial do WebView2; ADR-0019, validado no S2b) | **WebView2 Evergreen** (segurança atualizada pelo Windows, sem custo), IME e acessibilidade nativos, Chromium fora do processo da Unity, dentro da janela do jogo; S2b: completions p95 17 ms, diagnósticos p95 272 ms, 285 MB | sem tela cheia exclusiva; foco programático exige `MoveFocus`; reposicionar ao mudar tamanho/DPI |
+| ~~Janela PhotinoX separada~~ | — | **Descartada** pelo dono do produto (ADR-0019) |
 | **Fallback:** editor nativo em UI Toolkit | Sem dependência | Realce e autocomplete limitados, muito trabalho |
 | ~~Vuplex 3D WebView~~ | — | **Descartado:** pago (orçamento zero) |
 

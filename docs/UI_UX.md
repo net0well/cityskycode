@@ -15,20 +15,18 @@
 ```
 ┌───────────────────────────────────────────────────────────────────────┐
 │ 👥 2.340  💰 $124.000 (+$1.250/dia)  😊 78%  🌡️ 🟢 Saudável  📅 D12 08:30 ⏸ ▶ ▶▶ ▶▶▶ │  ← barra superior
-├──────┬──────────────────────────────────────────────────┬─────────────┤
-│ 🛣️    │                                                  │ INSPECTOR   │
-│ 🏠    │                                                  │ Casa #1029  │
-│ 🏪    │                  CIDADE (3D)                     │ ...         │
-│ ⚡    │                                                  │             │
-│ 🧨    │                                                  │             │
-│ ──   │                                                  │             │
-│ 🗺️    │  [overlays 1–9]                                  │             │
-├──────┴──────────────────────────────────────────────────┴─────────────┤
-│ { } CÓDIGO  │ Program.cs | EnergyAuditor.cs        ▶ ■ 🧪 💡 │ CONSOLE  │  ← painel acoplável
-│             │ (Monaco)                                    │ Build ok │
-└───────────────────────────────────────────────────────────────────────┘
+├──────┬──────────────────────────────────────┬────────────────────────┤
+│ 🛣️    │                                      │ [Inspector][Código][Lições] ← abas do painel direito
+│ 🏠    │                                      │ { } Código        ⤢  →  │
+│ 🏪    │              CIDADE (3D)             │ Program.cs  ▶ ✓ 💡      │
+│ ⚡    │                                      │ 1 using CitySky;        │
+│ 🧨    │                                      │ 2 var city = ...        │
+│ ──   │                                      │ (Monaco)                │
+│ 🗺️    │  [overlays 1–9]                      │ CONSOLE  Build ok       │
+└──────┴──────────────────────────────────────┴────────────────────────┘
 ```
-- Modos de layout: **Cidade** (painel de código minimizado), **Lado a lado**, **Código em foco** (cidade em miniatura).
+- **Painel lateral direito** (ADR-0019) com abas **Inspector**, **Código** e **Lições**. A aba Código tem três estados: **minimizado** (faixa de ~44 px com selo de erros; equivale ao modo "Cidade"), **normal** (~1/3 da largura; "lado a lado") e **expandido** (~70%; "código em foco", com a cidade visível à esquerda). Ctrl+` minimiza/restaura, Ctrl+Shift+` expande/restaura.
+- **Modos de janela:** janela, janela maximizada e **tela cheia sem bordas** (`FullScreenMode.FullScreenWindow`). Sem tela cheia exclusiva (ADR-0019).
 - Painéis: Orçamento, População, Energia, Problemas, Lições/Árvore de conhecimento, Termômetro, Configurações.
 
 ## 3. Componentes (§61)

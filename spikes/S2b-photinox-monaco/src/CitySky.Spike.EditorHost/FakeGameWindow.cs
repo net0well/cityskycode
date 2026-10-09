@@ -4,17 +4,10 @@ namespace CitySky.Spike.EditorHost;
 
 /// <summary>
 /// "Janela do jogo" falsa, em **outro processo** (como a Unity no produto): um formulário WinForms
-/// aberto pelo PowerShell. Serve para testar a janela do editor com dono entre processos.
+/// aberto pelo PowerShell (<c>fake-game.ps1</c>). Serve para testar o editor embutido entre processos.
 /// </summary>
 internal sealed class FakeGameWindow : IDisposable
 {
-    private const string Script =
-        "Add-Type -AssemblyName System.Windows.Forms; " +
-        "$f = New-Object System.Windows.Forms.Form; " +
-        "$f.Text = 'Jogo falso (spike S2b)'; $f.BackColor = 'DarkSlateGray'; " +
-        "$f.StartPosition = 'Manual'; $f.Left = 80; $f.Top = 80; $f.Width = 1280; $f.Height = 720; " +
-        "[System.Windows.Forms.Application]::Run($f)";
-
     private readonly Process _process;
 
     private FakeGameWindow(Process process, IntPtr handle)
@@ -29,7 +22,8 @@ internal sealed class FakeGameWindow : IDisposable
 
     public static FakeGameWindow Start(TimeSpan timeout)
     {
-        var info = new ProcessStartInfo("powershell.exe", ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", Script])
+        string script = Path.Combine(AppContext.BaseDirectory, "fake-game.ps1");
+        var info = new ProcessStartInfo("powershell.exe", ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", script])
         {
             UseShellExecute = false,
             CreateNoWindow = true,

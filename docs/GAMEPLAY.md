@@ -17,7 +17,7 @@
 | Velocidade | Espaço (pausa/retomar), `+`/`-` (1x ↔ 2x ↔ 3x ↔ 5x ↔ 10x) |
 | Marcadores de câmera | Ctrl+F5..F8 salva, F5..F8 retorna |
 | Ajuda | F1 (com o editor em foco: **dica** contextual) |
-| Painel de código | ` (crase) |
+| Painel de código: minimizar/restaurar · expandir/restaurar | Ctrl+` · Ctrl+Shift+` (ADR-0019) |
 | Executar código | Ctrl+Enter |
 | Desfazer construção | Ctrl+Z (até 5 s) |
 

@@ -21,11 +21,14 @@ Dar ao aluno uma experiência de **IDE real** dentro do jogo (realce, autocomple
 
 **Decisão:** Monaco, com serviços de linguagem fornecidos pelo **Roslyn no Code Host**. Fallback documentado: editor nativo mínimo (realce por classificação Roslyn + lista de completions), caso o spike S2 falhe.
 
+> **Atualização ([ADR-0019](ADR/0019-embedded-editor-panel.md), 2026-10-09):** o editor fica **dentro da janela do jogo, no painel lateral direito**, com três estados (minimizado, normal, expandido), e o jogo roda em janela e em tela cheia sem bordas. A janela separada (candidato B abaixo) foi descartada. O spike S2b validou o WebView2 como **janela-filha** da janela do jogo (B'). A escolha entre (A) e (B') sai do S2a.
+
 ### Hosts candidatos (todos gratuitos, ADR-0017)
 | Candidato | Como funciona | Prós | Contras |
 |---|---|---|---|
 | **A. UnityWebBrowser** (MIT) | Chromium (CEF) em processo próprio, renderiza numa textura dentro do painel do jogo | integrado à UI do jogo; open source | último release 2.1.1 (mar/2024, CEF 122): Chromium desatualizado; ~400 MB em repouso; manutenção incerta |
 | **B. Janela PhotinoX** (Apache-2.0) | o Code Host (.NET 10) abre uma janela PhotinoX, posicionada e acoplada à janela do jogo. No Windows ela usa o **WebView2** | runtime **Evergreen** atualizado pelo Windows (segurança em dia, sem custo); IME e acessibilidade nativos; tira o Chromium do processo da Unity; portável para macOS (WKWebView) e Linux (WebKitGTK) depois (ADR-0018) | duas janelas; exige o jogo em modo janela/borderless; gestão de foco e posição; janelas separadas são ruins no Steam Deck (futuro) |
+| **B'. WebView2 como janela-filha** (S2b, ADR-0019) | o Code Host cria a superfície WebView2 (PhotinoX ou SDK oficial `Microsoft.Web.WebView2`) como **filha** da janela do jogo, no retângulo do painel direito | mesmos prós do B; dentro da janela do jogo; funciona em janela e tela cheia sem bordas (S2b) | sem tela cheia exclusiva; foco programático exige `MoveFocus`; o host reposiciona quando o jogo muda de tamanho/DPI |
 | **C. Editor nativo mínimo** | UI Toolkit + classificação e completions do Roslyn | zero dependência | realce e edição limitados; muito trabalho |
 
 **Critério do S2:** digitação sem perda, IME/acentos, foco, memória ≤ 400 MB, segurança (versão do Chromium) e esforço de integração. **Hipótese inicial:** B tende a vencer em segurança e custo de manutenção, e A em imersão.
@@ -70,7 +73,8 @@ Referência de implementação: **RoslynPad** (editor open source que usa Roslyn
 **Filtragem pedagógica do autocomplete:** itens fora da allowlist ou ainda bloqueados **não aparecem**. Isso evita que o aluno descubra `System.IO` pelo autocomplete e receba um erro em seguida.
 
 ## 5. Experiência do usuário
-- **Layout:** painel acoplável na parte inferior (expansível para tela cheia) ou modo "lado a lado" (cidade à esquerda, código à direita).
+- **Layout (ADR-0019):** seção **Código** do painel lateral direito, com três estados: **minimizado** (faixa de ~44 px com "{ } Código" e selo de erros), **normal** (~1/3 da largura) e **expandido** (~70%, "código em foco", cidade visível à esquerda). Ctrl+` minimiza/restaura; Ctrl+Shift+` expande/restaura. O console fica sob o editor. Capturas do protótipo: `spikes/S2b-photinox-monaco/results/screenshots/`.
+- **Aparência:** tema próprio (azul-noite, verde-água para ação, âmbar para atenção, vermelho para erro), Inter na interface e JetBrains Mono no código (OFL), cabeçalho com expandir/minimizar, abas de arquivo, barra de status (linha/coluna, versão do C#, estado do Roslyn).
 - **Arquivos:** árvore simples do projeto do aluno (`Program.cs`, `EnergyAuditor.cs`...), com abas.
 - **Barra:** ▶ Executar (Ctrl+Enter) · ■ Parar · 🧪 Validar desafio · 💡 Dicas · ↺ Restaurar código inicial.
 - **Pausa automática** ao executar (MVP) e opcional ao abrir o editor (configuração de acessibilidade/carga cognitiva).

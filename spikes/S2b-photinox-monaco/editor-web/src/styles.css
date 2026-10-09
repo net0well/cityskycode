@@ -1,0 +1,130 @@
+/* Tema "City: SkyCode" — cidade ao entardecer: azul-noite, verde-água (ação) e âmbar (atenção). */
+:root {
+  --bg: #0d141c;
+  --panel: #111a24;
+  --panel-raised: #16212d;
+  --border: #223142;
+  --text: #d8e2ec;
+  --muted: #8299ad;
+  --accent: #3cc2b0;
+  --accent-strong: #2aa594;
+  --warning: #f2b54b;
+  --error: #f0707a;
+  --ok: #6fd18c;
+  --radius: 8px;
+  --ui-font: 'Inter', 'Segoe UI', sans-serif;
+  --code-font: 'JetBrains Mono', Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 var(--ui-font);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+button:hover { background: var(--panel-raised); border-color: var(--border); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.brace { color: var(--accent); font-family: var(--code-font); font-weight: 500; }
+
+/* ---------- painel ---------- */
+.panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr); /* sem isso a coluna cresce até a largura antiga do editor e não encolhe */
+  height: 100%;
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 6px 14px;
+  background: linear-gradient(180deg, #152231 0%, var(--panel) 100%);
+}
+.title { font-weight: 600; font-size: 14px; letter-spacing: 0.2px; }
+.window-actions { display: flex; gap: 2px; }
+.icon-button { padding: 4px 6px; line-height: 0; }
+.icon-button svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.icon-button:hover svg { stroke: var(--text); }
+body[data-state='expanded'] #btn-expand svg { transform: rotate(180deg); }
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px 0 6px;
+  border-bottom: 1px solid var(--border);
+}
+.tabs { display: flex; min-width: 0; overflow: hidden; }
+.tab {
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 8px 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  font-family: var(--code-font);
+  font-size: 12px;
+}
+.tab.active { color: var(--text); border-bottom-color: var(--accent); }
+.tab:hover { background: transparent; color: var(--text); border-color: transparent; border-bottom-color: var(--border); }
+.tab.active:hover { border-bottom-color: var(--accent); }
+.actions { display: flex; gap: 6px; flex-shrink: 0; }
+.primary { background: var(--accent); color: #062420; font-weight: 600; }
+.primary:hover { background: var(--accent-strong); border-color: transparent; }
+
+.editor { min-height: 0; min-width: 0; overflow: hidden; }
+
+/* ---------- console ---------- */
+.console { border-top: 1px solid var(--border); background: var(--bg); height: 150px; min-height: 0; display: flex; flex-direction: column; }
+.console-header { display: flex; justify-content: space-between; padding: 6px 14px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px; }
+.summary { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.summary.ok { color: var(--ok); }
+.summary.fail { color: var(--error); }
+.console-lines { list-style: none; margin: 0; padding: 0 14px 8px; overflow: auto; font: 12px/1.6 var(--code-font); }
+.console-lines li { white-space: pre-wrap; }
+.console-lines .error { color: var(--error); cursor: pointer; }
+.console-lines .error:hover { text-decoration: underline; }
+.console-lines .warning { color: var(--warning); }
+.console-lines .info { color: var(--muted); }
+.console-lines .city { color: var(--text); }
+
+.status-bar { display: flex; gap: 14px; padding: 3px 14px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); }
+.roslyn { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+/* ---------- estados do painel ---------- */
+.collapsed-tab { display: none; }
+body[data-state='minimized'] .panel { display: none; }
+body[data-state='minimized'] .collapsed-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 14px 0;
+  border-radius: 0;
+  border-left: 1px solid var(--border);
+  background: var(--panel);
+}
+.collapsed-label { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--muted); letter-spacing: 1px; }
+.badge { background: var(--error); color: #fff; border-radius: 10px; font-size: 11px; padding: 0 6px; }

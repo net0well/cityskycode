@@ -51,3 +51,8 @@ Desktop.ini
 # ---------- Dados locais (nunca versionar) ----------
 # Dados brutos de playtest (LGPD): só o relatório anonimizado vai para docs/playtests/
 playtest-data/
+
+# Bundles gerados a partir de editor-web/ (spikes)
+spikes/**/wwwroot/
+# Logs de execução dos spikes
+spikes/**/results-run*.log

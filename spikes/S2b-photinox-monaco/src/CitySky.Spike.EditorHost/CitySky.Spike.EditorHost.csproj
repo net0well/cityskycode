@@ -16,10 +16,13 @@
     <PackageReference Include="PhotinoX" Version="5.3.5" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="5.9.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.9.0" />
+    <!-- Só para as capturas de tela do spike (Windows). -->
+    <PackageReference Include="System.Drawing.Common" Version="10.0.12" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="fake-game.ps1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

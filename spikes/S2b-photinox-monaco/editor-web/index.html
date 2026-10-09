@@ -7,14 +7,58 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; worker-src blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
     />
-    <title>CitySky — editor (spike S2b)</title>
-    <style>
-      html, body { margin: 0; height: 100%; background: #1e1e1e; overflow: hidden; }
-      #editor { position: absolute; inset: 0; }
-    </style>
+    <title>City: SkyCode — editor (spike S2b)</title>
   </head>
-  <body>
-    <div id="editor"></div>
+  <body data-state="normal">
+    <!-- Estado minimizado: faixa vertical na borda direita da tela. -->
+    <button id="collapsed-tab" class="collapsed-tab" title="Abrir o código (Ctrl+`)">
+      <span class="brace">{ }</span>
+      <span class="collapsed-label">Código</span>
+      <span id="collapsed-badge" class="badge" hidden>0</span>
+    </button>
+
+    <section id="panel" class="panel">
+      <header class="panel-header">
+        <div class="title"><span class="brace">{ }</span> Código</div>
+        <div class="window-actions">
+          <button id="btn-expand" class="icon-button" title="Expandir (Ctrl+Shift+`)" aria-label="Expandir">
+            <svg viewBox="0 0 16 16"><path d="M3 9v4h4M13 7V3H9M3 13l4-4M13 3L9 7" /></svg>
+          </button>
+          <button id="btn-minimize" class="icon-button" title="Minimizar (Ctrl+`)" aria-label="Minimizar">
+            <svg viewBox="0 0 16 16"><path d="M10 3l5 5-5 5M1 8h13" /></svg>
+          </button>
+        </div>
+      </header>
+
+      <nav class="toolbar">
+        <div class="tabs" role="tablist">
+          <button class="tab active" role="tab">Program.cs</button>
+          <button class="tab" role="tab">EnergyAuditor.cs</button>
+        </div>
+        <div class="actions">
+          <button id="btn-run" class="primary" title="Executar (Ctrl+Enter)">▶ Executar</button>
+          <button id="btn-validate" title="Validar o desafio">✓ Validar</button>
+          <button id="btn-hint" title="Pedir uma dica (F1)">💡 Dica</button>
+        </div>
+      </nav>
+
+      <div id="editor" class="editor"></div>
+
+      <section class="console" aria-label="Console">
+        <header class="console-header">
+          <span>Console</span>
+          <span id="console-summary" class="summary ok">Build succeeded · 0 erros</span>
+        </header>
+        <ol id="console-lines" class="console-lines"></ol>
+      </section>
+
+      <footer class="status-bar">
+        <span id="status-position">Ln 1, Col 1</span>
+        <span>C# 14</span>
+        <span class="roslyn"><span class="dot"></span> Roslyn</span>
+      </footer>
+    </section>
+
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

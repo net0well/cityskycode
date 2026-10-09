@@ -1,6 +1,6 @@
 # ADR-0007: Usar Monaco (num host web gratuito) com serviços de linguagem Roslyn
 
-- **Status:** Aceito (escolha do host pendente no spike S2; candidatos revisados pelo ADR-0017: somente opções gratuitas)
+- **Status:** Aceito (escolha do host pendente no spike S2; candidatos revisados pelo ADR-0017: somente opções gratuitas; **revisado pelo [ADR-0019](0019-embedded-editor-panel.md): o editor fica embutido no painel lateral direito do jogo, e a janela separada foi descartada**)
 - **Data:** 2026-10-08
 - **Documentos afetados:** `CODE_EDITOR.md`, `UI_UX.md`, `SECURITY.md`
 

@@ -1,3 +1,9 @@
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import './styles.css';
 import * as monaco from 'monaco-editor/editor/editor.api';
 import 'monaco-editor/languages/definitions/csharp/register';
 import EditorWorker from 'monaco-editor/editor/editor.worker?worker&inline';
@@ -6,6 +12,7 @@ import EditorWorker from 'monaco-editor/editor/editor.worker?worker&inline';
 // Bridge com o host (.NET): mensagens JSON {type, id?, payload?} pelo canal do Photino.
 // ---------------------------------------------------------------------------------------------
 type Message = { type: string; id?: number; payload?: any };
+type PanelState = 'minimized' | 'normal' | 'expanded';
 
 interface PhotinoExternal {
   sendMessage(message: string): void;
@@ -35,9 +42,41 @@ document.addEventListener('securitypolicyviolation', (e) =>
 );
 
 // ---------------------------------------------------------------------------------------------
-// Editor
+// Editor (tema próprio do jogo)
 // ---------------------------------------------------------------------------------------------
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
+
+monaco.editor.defineTheme('citysky-dusk', {
+  base: 'vs-dark',
+  inherit: true,
+  rules: [
+    { token: 'keyword', foreground: '6cb6ff' },
+    { token: 'type', foreground: '3cc2b0' },
+    { token: 'identifier', foreground: 'd8e2ec' },
+    { token: 'string', foreground: 'f2b54b' },
+    { token: 'number', foreground: 'c4a7ff' },
+    { token: 'comment', foreground: '5f7a91', fontStyle: 'italic' },
+    { token: 'delimiter', foreground: '8299ad' },
+  ],
+  colors: {
+    'editor.background': '#111a24',
+    'editor.foreground': '#d8e2ec',
+    'editorLineNumber.foreground': '#3d5266',
+    'editorLineNumber.activeForeground': '#8299ad',
+    'editor.lineHighlightBackground': '#16212d',
+    'editor.selectionBackground': '#2a4a5f',
+    'editorCursor.foreground': '#3cc2b0',
+    'editorIndentGuide.background1': '#1c2a38',
+    'editorError.foreground': '#f0707a',
+    'editorWarning.foreground': '#f2b54b',
+    'editorSuggestWidget.background': '#16212d',
+    'editorSuggestWidget.border': '#223142',
+    'editorSuggestWidget.selectedBackground': '#1f3a45',
+    'editorHoverWidget.background': '#16212d',
+    'editorHoverWidget.border': '#223142',
+    'scrollbarSlider.background': '#22314288',
+  },
+});
 
 const starterCode = [
   'using CitySky;',
@@ -52,10 +91,22 @@ const starterCode = [
 const model = monaco.editor.createModel(starterCode, 'csharp', monaco.Uri.parse('inmemory://citysky/Program.cs'));
 const editor = monaco.editor.create(document.getElementById('editor')!, {
   model,
-  theme: 'vs-dark',
+  theme: 'citysky-dusk',
   automaticLayout: true,
-  fontSize: 15,
+  fontFamily: "'JetBrains Mono', Consolas, monospace",
+  fontSize: 14,
+  lineHeight: 22,
+  fontLigatures: true,
   minimap: { enabled: false },
+  padding: { top: 10 },
+  renderLineHighlight: 'all',
+  smoothScrolling: true,
+  cursorBlinking: 'smooth',
+  scrollbar: { verticalScrollbarSize: 10, horizontalScrollbarSize: 10 },
+});
+
+editor.onDidChangeCursorPosition((e) => {
+  document.getElementById('status-position')!.textContent = `Ln ${e.position.lineNumber}, Col ${e.position.column}`;
 });
 
 // Completions vindas do Roslyn no host.
@@ -89,7 +140,11 @@ function kindOf(tag: string): monaco.languages.CompletionItemKind {
   }
 }
 
-// Diagnósticos ao digitar: debounce de 250 ms; respostas antigas são descartadas pela versão do modelo.
+// ---------------------------------------------------------------------------------------------
+// Diagnósticos ao digitar (debounce de 250 ms) → marcadores + console
+// ---------------------------------------------------------------------------------------------
+type Diagnostic = { id: string; message: string; severity: string; startLine: number; startColumn: number; endLine: number; endColumn: number };
+
 const DebounceMs = 250;
 let debounce: number | undefined;
 let diagnosticsListener: ((version: number) => void) | undefined;
@@ -101,10 +156,11 @@ async function requestDiagnostics(): Promise<void> {
     return; // obsoleta
   }
 
+  const items = result.items as Diagnostic[];
   monaco.editor.setModelMarkers(
     model,
     'roslyn',
-    (result.items as any[]).map((d) => ({
+    items.map((d) => ({
       startLineNumber: d.startLine,
       startColumn: d.startColumn,
       endLineNumber: d.endLine,
@@ -113,12 +169,82 @@ async function requestDiagnostics(): Promise<void> {
       severity: d.severity === 'Error' ? monaco.MarkerSeverity.Error : monaco.MarkerSeverity.Warning,
     })),
   );
+  renderBuild(items);
   diagnosticsListener?.(version);
 }
 
 model.onDidChangeContent(() => {
   window.clearTimeout(debounce);
   debounce = window.setTimeout(() => void requestDiagnostics(), DebounceMs);
+});
+
+const consoleLines = document.getElementById('console-lines')!;
+const consoleSummary = document.getElementById('console-summary')!;
+const collapsedBadge = document.getElementById('collapsed-badge')!;
+
+function renderBuild(items: Diagnostic[]): void {
+  const errors = items.filter((d) => d.severity === 'Error');
+  const warnings = items.length - errors.length;
+  consoleSummary.textContent = errors.length === 0
+    ? `Build succeeded · 0 erros${warnings ? `, ${warnings} aviso(s)` : ''}`
+    : `Build failed · ${errors.length} erro(s)`;
+  consoleSummary.className = `summary ${errors.length === 0 ? 'ok' : 'fail'}`;
+  collapsedBadge.hidden = errors.length === 0;
+  collapsedBadge.textContent = String(errors.length);
+
+  consoleLines.replaceChildren(
+    ...items.slice(0, 50).map((d) => {
+      const li = document.createElement('li');
+      li.className = d.severity === 'Error' ? 'error' : 'warning';
+      li.textContent = `${d.severity === 'Error' ? '✖' : '⚠'} linha ${d.startLine}: ${d.id} ${d.message}`;
+      li.addEventListener('click', () => {
+        editor.revealLineInCenter(d.startLine);
+        editor.setSelection(new monaco.Range(d.startLine, d.startColumn, d.endLine, d.endColumn));
+        editor.focus();
+      });
+      return li;
+    }),
+  );
+}
+
+function appendConsole(text: string, kind: 'info' | 'city' | 'warning' | 'error'): void {
+  const li = document.createElement('li');
+  li.className = kind;
+  li.textContent = text;
+  consoleLines.append(li);
+}
+
+// ---------------------------------------------------------------------------------------------
+// Estados do painel: minimizado (faixa), normal (lateral) e expandido (código em foco).
+// O host redimensiona a janela-filha conforme o estado.
+// ---------------------------------------------------------------------------------------------
+function setState(state: PanelState, notifyHost = true): void {
+  document.body.dataset.state = state;
+  document.getElementById('btn-expand')!.title = state === 'expanded' ? 'Restaurar (Ctrl+Shift+`)' : 'Expandir (Ctrl+Shift+`)';
+  if (notifyHost) {
+    send({ type: 'panelState', payload: state });
+  }
+  if (state !== 'minimized') {
+    window.setTimeout(() => editor.layout(), 0);
+  }
+}
+
+const currentState = (): PanelState => (document.body.dataset.state as PanelState) ?? 'normal';
+
+document.getElementById('btn-minimize')!.addEventListener('click', () => setState('minimized'));
+document.getElementById('collapsed-tab')!.addEventListener('click', () => setState('normal'));
+document.getElementById('btn-expand')!.addEventListener('click', () => setState(currentState() === 'expanded' ? 'normal' : 'expanded'));
+document.getElementById('btn-run')!.addEventListener('click', () => send({ type: 'run', payload: model.getValue() }));
+
+window.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.code === 'Backquote') {
+    e.preventDefault();
+    if (e.shiftKey) {
+      setState(currentState() === 'expanded' ? 'normal' : 'expanded');
+    } else {
+      setState(currentState() === 'minimized' ? 'normal' : 'minimized');
+    }
+  }
 });
 
 // ---------------------------------------------------------------------------------------------
@@ -142,6 +268,13 @@ external.receiveMessage((raw) => {
     case 'getValue':
       send({ type: 'value', payload: model.getValue() });
       break;
+    case 'setState':
+      setState(message.payload as PanelState, false);
+      send({ type: 'stateApplied', payload: message.payload });
+      break;
+    case 'demo':
+      showDemo();
+      break;
     case 'tryNavigate':
       // Se o host não barrar, a página sai do ar e o host não recebe a resposta (teste negativo).
       window.location.assign('https://example.com/');
@@ -149,6 +282,33 @@ external.receiveMessage((raw) => {
       break;
   }
 });
+
+/** Conteúdo de demonstração para as capturas de tela: código com um erro e saída de uma execução. */
+function showDemo(): void {
+  model.setValue([
+    'using CitySky;',
+    '',
+    '// Lição 4: projetando uma casa eficiente',
+    'var city = CityGame.Current;',
+    'var house = new House();',
+    'house.Residents = 4;',
+    'house.Insulation = Insulation.Good;',
+    '',
+    'var result = city.Build(house);',
+    'city.Log(result.Message);',
+    'city.Log($"Consumo: {house.EnergyConsumption} kW");',
+    '',
+    'house.EnergyConsumption = 0; // dá para "zerar" o consumo?',
+    '',
+  ].join('\n'));
+  editor.setPosition({ lineNumber: 13, column: 30 });
+  window.setTimeout(() => {
+    appendConsole('▶ Program.cs executado em 38 ms', 'info');
+    appendConsole('Casa construída no lote L-17 (−$12.400)', 'city');
+    appendConsole('Population: 48 · Happiness: 76% · Treasury: $87.600', 'info');
+  }, 600);
+  send({ type: 'demoReady' });
+}
 
 // ---------------------------------------------------------------------------------------------
 // Autoteste (spike): latência de completions e diagnósticos, CSP e funcionamento offline.

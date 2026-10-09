@@ -13,6 +13,7 @@ internal sealed class EditorSession
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web) { WriteIndented = true };
 
     private readonly bool _selfTest;
+    private readonly string? _screenshotDir;
     private readonly string _outputPath;
     private readonly Stopwatch _sinceStart;
     private readonly RoslynService _roslyn = new();
@@ -24,17 +25,20 @@ internal sealed class EditorSession
     private FakeGameWindow? _game;
     private double _windowCreatedMs;
     private string _lastHitTest = string.Empty;
+    private string _panelState = "normal";
+    private bool _embedded;
 
-    public EditorSession(bool selfTest, string outputPath, Stopwatch sinceStart)
+    public EditorSession(bool selfTest, string? screenshotDir, string outputPath, Stopwatch sinceStart)
     {
         _selfTest = selfTest;
+        _screenshotDir = screenshotDir;
         _outputPath = outputPath;
         _sinceStart = sinceStart;
     }
 
     public int Run()
     {
-        if (_selfTest)
+        if (_selfTest || _screenshotDir is not null)
         {
             _game = FakeGameWindow.Start(TimeSpan.FromSeconds(15));
         }
@@ -49,7 +53,7 @@ internal sealed class EditorSession
             .SetSize(900, 700)
             .SetUseOsDefaultLocation(false)
             .SetLocation(new Point(220, 160))
-            .SetDevToolsEnabled(!_selfTest)
+            .SetDevToolsEnabled(!_selfTest && _screenshotDir is null)
             .SetContextMenuEnabled(false)
             .SetUserDataFolder(Path.Combine(Path.GetTempPath(), "CitySkySpikeS2b"))
             .RegisterCustomSchemeHandler("app", ServeFile)
@@ -108,6 +112,8 @@ internal sealed class EditorSession
             ".js" => "text/javascript",
             ".css" => "text/css",
             ".ttf" => "font/ttf",
+            ".woff" => "font/woff",
+            ".woff2" => "font/woff2",
             ".svg" => "image/svg+xml",
             ".json" => "application/json",
             _ => "application/octet-stream",
@@ -143,6 +149,19 @@ internal sealed class EditorSession
                 if (_selfTest)
                 {
                     _ = Task.Run(SelfTestAsync);
+                }
+                else if (_screenshotDir is not null)
+                {
+                    _ = Task.Run(ScreenshotsAsync);
+                }
+                break;
+
+            case "panelState":
+                // O aluno clicou em minimizar/expandir dentro do painel: o host redimensiona a janela-filha.
+                _panelState = payload.GetString() ?? "normal";
+                if (_embedded)
+                {
+                    PlaceInRightPanel(_window.WindowHandle, _game!.Handle);
                 }
                 break;
 
@@ -185,11 +204,14 @@ internal sealed class EditorSession
         _window.Invoke(() => _window.SendWebMessage(json));
     }
 
-    private async Task<JsonElement> RequestAsync(string type, string replyType, TimeSpan timeout)
+    private Task<JsonElement> RequestAsync(string type, string replyType, TimeSpan timeout) =>
+        RequestAsync(type, payload: null, replyType, timeout);
+
+    private async Task<JsonElement> RequestAsync(string type, object? payload, string replyType, TimeSpan timeout)
     {
         var waiter = new TaskCompletionSource<JsonElement>(TaskCreationOptions.RunContinuationsAsynchronously);
         _waiters[replyType] = waiter;
-        Send(new { type });
+        Send(new { type, payload });
         return await waiter.Task.WaitAsync(timeout);
     }
 
@@ -323,7 +345,37 @@ internal sealed class EditorSession
     // ------------------------------------------------------------------------------------------
     // Editor embutido: janela-filha (WS_CHILD) do jogo, ocupando o painel lateral direito.
     // ------------------------------------------------------------------------------------------
-    private const double PanelFraction = 0.35;
+    private const int HudHeight = 40;          // barra superior do jogo; o painel começa abaixo dela
+    private const int CollapsedWidth = 44;     // faixa do painel minimizado
+    private const double NormalFraction = 0.34;
+    private const double ExpandedFraction = 0.70;
+
+    private void EmbedAsChild(IntPtr editor, IntPtr game)
+    {
+        _window.Invoke(() =>
+        {
+            Native.SetWindowLongPtrW(editor, Native.GwlpHwndParent, IntPtr.Zero); // desfaz um dono anterior
+            long style = Native.GetWindowLongPtrW(editor, Native.GwlStyle).ToInt64();
+            style &= ~(Native.WsPopup | Native.WsCaption | Native.WsThickFrame | Native.WsSysMenu | Native.WsMinimizeBox | Native.WsMaximizeBox);
+            style |= Native.WsChild | Native.WsClipSiblings;
+            Native.SetWindowLongPtrW(editor, Native.GwlStyle, new IntPtr(style));
+            Native.SetParent(editor, game);
+        });
+        _embedded = true;
+        PlaceInRightPanel(editor, game);
+    }
+
+    /// <summary>Retângulo do painel (coordenadas do cliente do jogo) para o estado atual.</summary>
+    private Native.Rect PanelRect(Native.Rect client)
+    {
+        int width = _panelState switch
+        {
+            "minimized" => CollapsedWidth,
+            "expanded" => (int)(client.Right * ExpandedFraction),
+            _ => (int)(client.Right * NormalFraction),
+        };
+        return new Native.Rect { Left = client.Right - width, Top = HudHeight, Right = client.Right, Bottom = client.Bottom };
+    }
 
     private async Task<JsonObject> EmbeddedTestAsync()
     {
@@ -336,16 +388,7 @@ internal sealed class EditorSession
         Native.SetWindowLongPtrW(game, Native.GwlStyle, new IntPtr(gameStyle));
 
         long start = Stopwatch.GetTimestamp();
-        _window.Invoke(() =>
-        {
-            Native.SetWindowLongPtrW(editor, Native.GwlpHwndParent, IntPtr.Zero); // desfaz o dono do teste anterior
-            long style = Native.GetWindowLongPtrW(editor, Native.GwlStyle).ToInt64();
-            style &= ~(Native.WsPopup | Native.WsCaption | Native.WsThickFrame | Native.WsSysMenu | Native.WsMinimizeBox | Native.WsMaximizeBox);
-            style |= Native.WsChild | Native.WsClipSiblings;
-            Native.SetWindowLongPtrW(editor, Native.GwlStyle, new IntPtr(style));
-            Native.SetParent(editor, game);
-        });
-        PlaceInRightPanel(editor, game);
+        EmbedAsChild(editor, game);
         result["embedMs"] = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
         Thread.Sleep(500);
         result["isChildOfGame"] = Native.IsChild(game, editor);
@@ -520,20 +563,73 @@ internal sealed class EditorSession
     private void PlaceInRightPanel(IntPtr editor, IntPtr game)
     {
         Native.GetClientRect(game, out Native.Rect client);
-        int width = (int)(client.Right * PanelFraction);
+        Native.Rect p = PanelRect(client);
         _window.Invoke(() => Native.SetWindowPos(
-            editor, IntPtr.Zero, client.Right - width, 0, width, client.Bottom,
+            editor, IntPtr.Zero, p.Left, p.Top, p.Right - p.Left, p.Bottom - p.Top,
             Native.SwpNoZOrder | Native.SwpFrameChanged | Native.SwpShowWindow));
     }
 
-    private static bool PanelMatches(IntPtr editor, IntPtr game)
+    private bool PanelMatches(IntPtr editor, IntPtr game)
     {
         Native.GetClientRect(game, out Native.Rect client);
-        int width = (int)(client.Right * PanelFraction);
+        Native.Rect p = PanelRect(client);
         Native.GetWindowRect(editor, out Native.Rect e);
         Native.MapWindowPoints(IntPtr.Zero, game, ref e, 2); // tela → cliente do jogo
-        return Math.Abs(e.Left - (client.Right - width)) <= 1 && Math.Abs(e.Top) <= 1
-            && Math.Abs(e.Right - client.Right) <= 1 && Math.Abs(e.Bottom - client.Bottom) <= 1;
+        return Math.Abs(e.Left - p.Left) <= 1 && Math.Abs(e.Top - p.Top) <= 1
+            && Math.Abs(e.Right - p.Right) <= 1 && Math.Abs(e.Bottom - p.Bottom) <= 1;
+    }
+
+    // ------------------------------------------------------------------------------------------
+    // Capturas de tela dos três estados do painel (normal, expandido, minimizado).
+    // ------------------------------------------------------------------------------------------
+    private async Task ScreenshotsAsync()
+    {
+        IntPtr editor = _window.WindowHandle;
+        IntPtr game = _game!.Handle;
+        var shots = new JsonArray();
+        try
+        {
+            Directory.CreateDirectory(_screenshotDir!);
+            EmbedAsChild(editor, game);
+            await RequestAsync("demo", "demoReady", TimeSpan.FromSeconds(10));
+            Thread.Sleep(1800); // diagnósticos (debounce) + console da demonstração
+
+            foreach (string state in new[] { "normal", "expanded", "minimized" })
+            {
+                await RequestAsync("setState", state, "stateApplied", TimeSpan.FromSeconds(10));
+                _panelState = state;
+                PlaceInRightPanel(editor, game);
+                Native.SetForegroundWindow(game);
+                Thread.Sleep(900);
+                string path = Path.Combine(_screenshotDir!, "panel-" + state + ".png");
+                if (OperatingSystem.IsWindows())
+                {
+                    Capture(game, path);
+                    shots.Add(path);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _results["fatal"] = ex.ToString();
+        }
+
+        _results["screenshots"] = shots;
+        _results["pageErrors"] = new JsonArray(_pageErrors.Select(e => (JsonNode)e).ToArray());
+        Finish();
+    }
+
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
+    private static void Capture(IntPtr window, string path)
+    {
+        Native.GetWindowRect(window, out Native.Rect r);
+        using var bitmap = new Bitmap(r.Right - r.Left, r.Bottom - r.Top);
+        using (Graphics graphics = Graphics.FromImage(bitmap))
+        {
+            graphics.CopyFromScreen(r.Left, r.Top, 0, 0, bitmap.Size);
+        }
+
+        bitmap.Save(path, System.Drawing.Imaging.ImageFormat.Png);
     }
 
     /// <summary>Injeta caracteres Unicode só enquanto <paramref name="topLevel"/> tem o foco (nunca digita em outro app).</summary>

@@ -76,7 +76,7 @@ Ter, de ponta a ponta e com qualidade de produção, o caminho **editor → Code
 |---|---|---|---|---|
 | F1-50 | `IIpcTransport` + implementação escolhida no S1b (named pipe com ACL do usuário ou TCP loopback com token de 256 bits) | Contracts (interface) / Infrastructure + Code Host | S1b | teste de integração de ida e volta |
 | F1-51 | `ISandboxLauncher` + implementação Windows com **Job Object** (limites do `CODE_EXECUTION_SECURITY.md` §3 L5) | Code Host | S6 | Worker morre ao fechar o Host; filho proibido |
-| F1-52 | `ICodeEditorHost` + implementação escolhida no S2 | Presentation | S2a/S2b | editor abre e recebe foco |
+| F1-52 | `ICodeEditorHost` + implementação escolhida no S2, **embutida no painel lateral direito** (ADR-0019): retângulo do painel enviado pela Unity, superfície oculta no estado minimizado, recriação se a janela do jogo for recriada; decidir o foco programático (expor `MoveFocus` no PhotinoX, SDK oficial do WebView2 ou só clique) | Presentation / Code Host | S2a/S2b | editor abre no painel, recebe foco pelo atalho e pelo clique; funciona em janela e tela cheia sem bordas |
 | F1-53 | `IPlatformServices` (implementação *Standalone*) e `IFileLocations` (pastas de saves, perfis, logs; empacotado ou não, conforme o S7) | Infrastructure | S7 | caminhos montados com `Path.Combine`; teste por plataforma |
 
 ### E7 — Contracts v1
@@ -105,7 +105,7 @@ Ter, de ponta a ponta e com qualidade de produção, o caminho **editor → Code
 | ID | Tarefa | Onde | Depende de | Pronto quando |
 |---|---|---|---|---|
 | F1-90 | `editor-web/` (TypeScript + Vite + Monaco, bundle local), bridge tipada, CSP do S2 | `editor-web/` | S2 | build gera `StreamingAssets/editor-web` |
-| F1-91 | `CodePanel` e `ConsoleView` (UI Toolkit), botão ▶ e Ctrl+Enter, erro clicável → linha no editor | Presentation | F1-52, F1-90 | clicar no erro posiciona o cursor |
+| F1-91 | Painel lateral direito (UI Toolkit) com abas Inspector/Código/Lições; seção Código com estados **minimizado / normal / expandido** (Ctrl+`, Ctrl+Shift+`), tema do jogo, console com erro clicável → linha no editor, botão ▶ e Ctrl+Enter | Presentation / editor-web | F1-52, F1-90 | os três estados funcionam em janela e tela cheia sem bordas; clicar no erro posiciona o cursor |
 | F1-92 | `EditorBroker`: debounce de 250 ms, versão do documento, descarte de respostas obsoletas | Presentation | F1-91 | resposta antiga não sobrescreve a nova |
 | F1-93 | Diagnósticos ao digitar (`GetDiagnostics`) | Code Host + Presentation | F1-71 | sublinhado em ≤ 400 ms (medido) |
 
