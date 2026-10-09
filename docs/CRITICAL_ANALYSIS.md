@@ -1,4 +1,4 @@
-# Análise Crítica do Projeto CitySkyCode
+# Análise Crítica do Projeto City: SkyCode
 
 > **Status:** v1.0 · **Data:** 2026-10-08 · **Fase:** 0 (Pesquisa e Arquitetura)
 > **Leitura obrigatória** antes de qualquer outro documento técnico. Este documento existe porque o briefing (`main.md`, §78) pediu explicitamente: *"Não concorde automaticamente comigo. Se uma ideia for ruim, explique."*
@@ -160,6 +160,8 @@ O briefing não define plataformas, e a decisão é crítica: **compilação de 
 ### D17. Nome do produto
 
 "CitySkyCode" lembra **"Cities: Skylines"** (marca da Paradox Interactive). Para um projeto de estudos isso é irrelevante, mas **antes de qualquer lançamento público** é preciso fazer uma busca de marca e possivelmente renomear. Neste repositório, o namespace de código usa `CitySky` como nome provisório.
+
+**Atualização (2026-10-08):** o dono do produto definiu o nome **City: SkyCode**. Com os dois-pontos, o formato ficou **ainda mais próximo** de "Cities: Skylines" ("palavra: Sky…"). Isso aumenta o risco de confusão com a marca da Paradox, sobretudo em lojas (Microsoft Store, Steam), onde os nomes aparecem lado a lado. Recomendação: manter o nome durante o desenvolvimento, fazer a busca de marca (INPI no Brasil; EUIPO/USPTO para lojas internacionais) **antes da Fase 20**, e ter um nome alternativo pronto. Risco R17 atualizado.
 
 ### D18. Quantidade de documentos (≈75 arquivos)
 

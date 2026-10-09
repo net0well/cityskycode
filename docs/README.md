@@ -1,4 +1,4 @@
-# Documentação do CitySkyCode
+# Documentação do City: SkyCode
 
 > **Fase atual:** 0, Pesquisa e Arquitetura · **Atualizado:** 2026-10-08
 > Briefing original: [`/main.md`](../main.md). As decisões que **divergem** do briefing estão justificadas em [`CRITICAL_ANALYSIS.md`](CRITICAL_ANALYSIS.md).

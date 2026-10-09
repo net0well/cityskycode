@@ -1,7 +1,7 @@
 # Sala de Aula
 
 > **Status:** v1.0 · **Data:** 2026-10-08 · **ADR:** [0017](ADR/0017-product-scope-classroom.md) · **MVP:** parcial (perfis, tamanho das lições, playtest em sala)
-> O CitySkyCode é um **produto educacional** que será usado em sala de aula, **sem servidor e sem orçamento**. Tudo aqui funciona offline, com arquivos.
+> O City: SkyCode é um **produto educacional** que será usado em sala de aula, **sem servidor e sem orçamento**. Tudo aqui funciona offline, com arquivos.
 
 ---
 

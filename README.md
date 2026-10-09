@@ -1,4 +1,6 @@
-# CitySkyCode *(nome provisório)*
+# City: SkyCode
+
+> Nome definido pelo dono do produto em 2026-10-08. Antes do lançamento público é obrigatória uma busca de marca (risco R17). No código, o namespace continua `CitySky`.
 
 **Um simulador de cidade 3D em que você não apenas constrói a cidade: você a programa em C#.**
 

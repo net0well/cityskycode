@@ -1,4 +1,4 @@
-# CLAUDE.md — CitySkyCode
+# CLAUDE.md — City: SkyCode
 
 > Instruções operacionais para agentes de IA. Fonte completa: [`docs/AI_DEVELOPMENT_GUIDE.md`](docs/AI_DEVELOPMENT_GUIDE.md).
 > Se `/dotnet-init` (dotnet-claude-kit) for executado, escolher **merge**: este arquivo é a fonte de verdade.

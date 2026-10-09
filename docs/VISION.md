@@ -5,7 +5,7 @@
 ---
 
 ## 1. Em uma frase
-> **CitySkyCode é um simulador de cidade 3D em que o jogador não apenas constrói a cidade: ele a programa em C#, e o código tem consequências reais no mundo.**
+> **City: SkyCode é um simulador de cidade 3D em que o jogador não apenas constrói a cidade: ele a programa em C#, e o código tem consequências reais no mundo.**
 
 ## 2. Princípio central (§80)
 > *"O jogador deve sentir que está aprendendo engenharia de software porque está tentando fazer uma cidade funcionar."*

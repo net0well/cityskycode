@@ -65,7 +65,7 @@ Sem *game over* na Campanha. Os Cenários podem ter condição de derrota explí
 - 1 dia de jogo = 48 min reais em 1x (calibrável). A maioria jogará entre 2x e 5x.
 
 ## 7. Diferenciais frente a city builders e jogos de programação
-| Característica | City builders | Jogos de programação | CitySkyCode |
+| Característica | City builders | Jogos de programação | City: SkyCode |
 |---|---|---|---|
 | Simulação urbana profunda | ✅ | ❌ | ✅ (escopo progressivo) |
 | Linguagem real (C#) | ❌ | às vezes | ✅ C# moderno + Roslyn |

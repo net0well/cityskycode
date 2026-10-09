@@ -4,7 +4,7 @@
 
 ## 1. Contexto
 
-O CitySkyCode não é "um city builder que também tem código". É um **simulador urbano programável em C#**. A engine precisa, em ordem de importância:
+O City: SkyCode não é "um city builder que também tem código". É um **simulador urbano programável em C#**. A engine precisa, em ordem de importância:
 
 1. conviver bem com **C#**: o domínio, a API do jogador e as ferramentas são todos C#;
 2. permitir **integrar compilação e análise de C#** (Roslyn) e execução segura do código do jogador;
