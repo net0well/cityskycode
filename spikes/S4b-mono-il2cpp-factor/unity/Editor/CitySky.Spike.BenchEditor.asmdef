@@ -1,0 +1,8 @@
+{
+    "name": "CitySky.Spike.BenchEditor",
+    "rootNamespace": "CitySky.Spike.Bench.Editor",
+    "references": ["CitySky.Spike.Bench", "CitySky.Spike.Domain"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "autoReferenced": true
+}

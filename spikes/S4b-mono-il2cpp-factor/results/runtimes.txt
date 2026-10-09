@@ -1,0 +1,3 @@
+runtime=Editor-Mono unity=6000.6.5f1 citizens=100000 seed=42 meanMs=0.1025 p50Ms=0.0339 p95Ms=0.3937 maxMs=0.9839 allocBytesDay=0 hash1day=DC336B8F860D4770 hash2days=DC336B8F860D4770
+runtime=Player-Mono unity=6000.6.5f1 citizens=100000 seed=42 meanMs=0.1105 p50Ms=0.0368 p95Ms=0.4196 maxMs=1.1813 allocBytesDay=0 hash1day=DC336B8F860D4770 hash2days=DC336B8F860D4770
+runtime=Player-IL2CPP unity=6000.6.5f1 citizens=100000 seed=42 meanMs=0.0738 p50Ms=0.0291 p95Ms=0.2714 maxMs=0.5311 allocBytesDay=0 hash1day=DC336B8F860D4770 hash2days=DC336B8F860D4770

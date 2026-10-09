@@ -18,7 +18,7 @@ Primeiro o que não depende da Unity (dá para começar já), depois o que depen
 | 5 | **S1b** Player Unity IL2CPP ↔ Code Host (named pipe; fallback TCP) | [S1b](S1b-il2cpp-ipc.md) | Unity, S1a | 2 d | S7, F1 | Planejado |
 | 6 | **S2a** UnityWebBrowser no painel do jogo + **decisão do host** | [S2a](S2a-unitywebbrowser.md) | Unity, S2b | 2 d | F1 | Planejado |
 | 7 | **S3** Orçamento de renderização URP (5k prédios, 20k árvores, 1k agentes) | [S3](S3-urp-render-budget.md) | Unity + **PC com GPU integrada** | 3 d | gate F2 | Planejado |
-| 8 | **S4b** Fator Mono/IL2CPP + hash entre runtimes | [S4b](S4b-mono-il2cpp-factor.md) | S4a, Unity | 1 d | F5 | Planejado |
+| 8 | **S4b** Fator Mono/IL2CPP + hash entre runtimes | [S4b](S4b-mono-il2cpp-factor.md) | S4a, Unity | 1 d | F5 | ✅ **Concluído** (IL2CPP 1,34× o .NET; hash idêntico nos 4 runtimes) |
 | 9 | **S5** Malha de ruas e interseções em runtime | [S5](S5-road-mesh.md) | Unity | 3 d | F3 | Planejado |
 | 10 | **S7** MSIX sem admin + Microsoft Store + política de código dinâmico | [S7](S7-msix-store.md) | S1b, S6, Partner Center | 2 d | F1 | Planejado |
 
@@ -36,7 +36,7 @@ Total estimado: **~23 dias de trabalho** de uma pessoa. Os spikes 1–4 rodam em
 | Visual Studio 2026 Community | ✅ instalado. **Confirmar as cargas de trabalho** "Desenvolvimento de jogos com Unity" e "Desenvolvimento para desktop com C++" (o IL2CPP exige o compilador C++ da Microsoft) |
 | CWM.RoslynNavigator (dotnet-claude-kit) | ✅ 0.8.0. Rodar `dotnet tool update -g CWM.RoslynNavigator` |
 | **Unity Hub + Unity 6.6 com Windows Build Support (IL2CPP)** | ✅ Unity Hub 3.22.2 (MSIX) + Unity **6000.6.5f1** com IL2CPP em `C:\Unity\Editor` |
-| **Conta Unity (licença Personal, gratuita)** | ❌ **não ativada**: o modo batch falha com "0 free entitlements". Bloqueia S1b, S2a, S3, S4b e S5. **Ação do dono do produto:** abrir o Unity Hub → entrar com a conta Unity → Preferências → Licenças → Adicionar → licença Personal gratuita |
+| **Conta Unity (licença Personal, gratuita)** | ✅ **ativada** em 2026-10-09 (`Unity_lic.ulf`); o modo batch resolve entitlements. Desbloqueou S4b (feito), S1b, S2a, S3, S5 |
 | **Repositório Git** | ✅ https://github.com/net0well/cityskycode (branch `main`) |
 | **Pasta fora do OneDrive** | ✅ projeto em `C:\dev\cityskycode` (a cópia antiga em `OneDrive\Desktop\Estudos\cityskycode` pode ser apagada) |
 | **PC com GPU integrada (Intel Iris Xe ou similar)** | ❌ a máquina de desenvolvimento (Radeon RX 7600, 32 GB) está muito acima do mínimo. O S3 precisa de um notebook ou PC de escola real |

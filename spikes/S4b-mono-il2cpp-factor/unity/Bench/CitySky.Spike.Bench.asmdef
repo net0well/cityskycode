@@ -1,0 +1,10 @@
+{
+    "name": "CitySky.Spike.Bench",
+    "rootNamespace": "CitySky.Spike.Bench",
+    "references": ["CitySky.Spike.Domain"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true,
+    "noEngineReferences": false
+}
