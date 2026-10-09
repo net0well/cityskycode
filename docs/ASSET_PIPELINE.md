@@ -8,6 +8,7 @@
 | Tecnologia | Decisão | Quando |
 |---|---|---|
 | **LOD** (LOD Group: LOD0–LOD2 + impostor/cull) | **Obrigatório para toda malha de mundo** | desde o 1º asset |
+| **Mesh LOD** (Unity 6.2+: LODs gerados na importação, guardados no próprio *index buffer*, sem objetos novos) | **padrão para modelos de kits** (Kenney e Quaternius não trazem LODs); LOD Group fica para casos com materiais diferentes por nível | desde o 1º asset |
 | **GPU instancing** | automático via **GPU Resident Drawer** (URP) para MeshRenderers | MVP |
 | **Entities Graphics** | agentes ECS (pedestres e veículos) | Fase 11 |
 | **Addressables** | catálogo de prédios/props por chave de arquétipo, carregamento sob demanda, grupos por tema | Fase 10 (MVP: referências diretas, YAGNI) |
@@ -54,7 +55,7 @@ Nomes: <classe>_<nome>_<variante>_LOD<n>   ex.: bld_house_small_a_LOD0
 | **Poly Haven** | CC0 | HDRIs de céu, texturas |
 | **ambientCG** | CC0 | materiais PBR |
 | Kenney Audio, Freesound (filtro CC0) | CC0 | ambiente e UI |
-| Asset Store (gratuitos) | Standard Unity Asset Store EULA | só se necessário. **Não versionar em repositório público** (a licença proíbe redistribuição) |
+| Asset Store (gratuitos) | Standard Unity Asset Store EULA | só se necessário (candidatos em `docs/art/ART_SOURCES.md` §4.2). **Não versionar em repositório público** (a licença proíbe redistribuição; o repositório atual é privado). Download só pela conta Unity do dono do projeto |
 | Blender (próprio) | — | ajustes, LODs, variações, prédios especiais |
 
 - **Cuidado com marcas dentro de assets CC0:** CC0 não libera marcas de terceiros. Exemplo real: a cruz vermelha é marca protegida; hospitais usam outro símbolo.

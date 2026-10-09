@@ -30,7 +30,8 @@ A tabela do briefing foi mantida, com **três correções** marcadas com ⚠️.
 | Testes | NUnit (Unity Test Framework + NUnit 4 no .NET) | 1 | ADR-0016 |
 | Versionamento | Git + Git LFS | 0 | — |
 | Distribuição | Microsoft Store (MSIX assinado gratuitamente) + itch.io | 20 | ADR-0017 |
-| Arte e áudio | Kits CC0 (Kenney, Quaternius, Poly Haven, ambientCG) | 2 | ADR-0017 |
+| Arte e áudio | Kits CC0 (Kenney, Quaternius, Poly Haven, ambientCG); gratuitos da Asset Store só para lacunas | 2 | ADR-0017 · `docs/art/ART_SOURCES.md` |
+| Recursos gráficos | Só da Unity no MVP: GPU Resident Drawer, **Mesh LOD** (6.2+), SSAO, Decals, Volumes, Shader Graph, VFX Graph, ProBuilder/Polybrush. Fog volumétrico e nuvens gratuitos de terceiros em avaliação | 2 | `docs/art/ART_SOURCES.md` §2–3 |
 | Ferramental de IA (.NET) | **Claude Code + dotnet-claude-kit** | 0 | ADR-0015 |
 
 ---

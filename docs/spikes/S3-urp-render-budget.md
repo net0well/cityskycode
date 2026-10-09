@@ -34,9 +34,9 @@ A GPU é o gargalo mais provável de um city builder (R05; lição de *Cities: S
 PC alvo: registrar modelo, CPU, GPU (Iris Xe / driver), RAM, resolução, se está na tomada (notebook em bateria reduz desempenho). PC de desenvolvimento: Radeon RX 7600, 32 GB. Unity 6.6, URP da versão.
 
 ## Plano de execução
-**Dia 1:** importar kits; verificar polígonos (os kits Kenney já são low-poly: medir se LOD ajuda ou se o gargalo é draw call/sombra); gerar LODs onde fizer diferença (Blender decimate ou ferramenta gratuita com ficha); gerador da cena; configuração do URP.
+**Dia 1:** importar kits; verificar polígonos (os kits Kenney já são low-poly: medir se LOD ajuda ou se o gargalo é draw call/sombra); gerar LODs com o **Mesh LOD** da Unity 6.2+ na importação (Blender só onde falhar); gerador da cena; configuração do URP.
 **Dia 2:** câmera roteirizada; captura por `FrameTimingManager` gravando CSV (funciona sem o Editor conectado, útil no PC emprestado); build IL2CPP *Development* e *Release*; primeira rodada no Iris Xe.
-**Dia 3:** variações (GRD ligado/desligado, distância de sombra, SSAO, STP 67% × 100%, densidade de árvores, número de agentes 50/300/1.000); relatório com a configuração recomendada do preset Baixo.
+**Dia 3:** variações (GRD ligado/desligado, Mesh LOD ligado/desligado, distância de sombra, SSAO, STP 67% × 100%, densidade de árvores, número de agentes 50/300/1.000) e, se der tempo, custo dos complementos gratuitos de `docs/art/ART_SOURCES.md` §3 (fog volumétrico, nuvens em domo); relatório com a configuração recomendada do preset Baixo.
 
 ## Método de medição
 3 capturas de 300 frames por zoom e por período (dia/noite), VSync desligado, após 30 s de aquecimento (`PROFILING.md` §2). Percentis calculados do CSV. Memória por `Profiler.GetTotalReservedMemoryLong` e Gerenciador de Tarefas.

@@ -52,9 +52,10 @@ Tudo o que vem depois (ruas, casas, cidadãos) precisa de um chão, de uma câme
 | ID | Tarefa | Onde | Depende de | Pronto quando |
 |---|---|---|---|---|
 | F2-30 | Paleta, materiais base (lista permitida de shaders, compatíveis com SRP Batcher e GRD) e `ART_DIRECTION.md` | `docs/art/`, Assets/Materials | — | revisão pelo dono do produto |
-| F2-31 | Importar Kenney City Kits e Quaternius com *import presets* por pasta; gerar LODs onde faltar (Blender) | Assets/Art | F2-30 | todos os prefabs com LOD Group |
+| F2-31 | Importar Kenney City Kits e Quaternius com *import presets* por pasta; **Mesh LOD** na importação (Unity 6.2+); Blender só onde o gerador falhar; trocar materiais pelo atlas de paleta do projeto | Assets/Art | F2-30 | todos os modelos com LOD; ≤ 60 materiais únicos |
 | F2-32 | `ASSET_LICENSES.md` com origem, licença e atribuição de cada asset | `docs/art/` | F2-31 | nenhum asset sem registro |
 | F2-33 | Linter de assets v0 (batch): LOD Group e orçamento, shader na lista, textura com mipmap, prop pequeno sem sombra, licença registrada | `tools/`, Editor | F2-31 | CI reprova um asset fora da regra |
+| F2-34 | Avaliar os complementos gráficos gratuitos de `docs/art/ART_SOURCES.md` §3 (fog volumétrico, nuvens em domo, água estilizada) na cena `perf-render`, com ficha de dependência e custo por preset | Assets, `docs/art/` | F2-50 | decisão registrada por item (adotar no preset Alto / Baixo / descartar) |
 
 ### E5 — Seleção, Inspector e HUD
 | ID | Tarefa | Onde | Depende de | Pronto quando |

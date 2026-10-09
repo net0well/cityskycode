@@ -18,6 +18,8 @@
 
 Referências de estilo: city builders e "dioramas" estilizados modernos. Paleta e guia em `docs/art/` (Fase 2).
 
+**Fontes gratuitas de arte e ferramentas, e o que dá para alcançar do visual de *Cities: Skylines* sem custo:** [`docs/art/ART_SOURCES.md`](art/ART_SOURCES.md) (pesquisa de 2026-10-09).
+
 **Ajuste por orçamento zero (ADR-0017):** a base de arte são kits **CC0** (Kenney City Kits, Quaternius), de estilo **low-poly estilizado**. O alvo visual passa de "estilizado-realista" para **"low-poly estilizado, limpo e bem iluminado"**. A qualidade vem da iluminação (dia/noite, SSAO, emissivos), da paleta coerente, da variação procedural e da vida da cidade, não da contagem de polígonos. Isso também ajuda no hardware mínimo de escola.
 
 ## 2. Pipeline: URP (não HDRP)
