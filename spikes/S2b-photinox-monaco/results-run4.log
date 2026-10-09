@@ -1,0 +1,2 @@
+Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
+   at Photino.NET.PhotinoWindow.<>c.<.ctor>b__62_3(IntPtr state)

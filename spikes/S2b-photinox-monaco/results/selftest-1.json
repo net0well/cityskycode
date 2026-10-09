@@ -1,0 +1,156 @@
+{
+  "roslynColdStart": {
+    "firstCompletionMs": 2073.8753,
+    "firstDiagnosticsMs": 298.619
+  },
+  "pageReadyMsSinceStart": 6488.7836,
+  "pageHref": "app://localhost/index.html",
+  "web": {
+    "completions": {
+      "roundTrip": {
+        "n": 200,
+        "mean": 12.439499999992549,
+        "p50": 10.600000001490116,
+        "p95": 17.300000000745058,
+        "max": 270.79999999701977
+      },
+      "server": {
+        "n": 200,
+        "mean": 11.390690499999998,
+        "p50": 9.7247,
+        "p95": 16.2354,
+        "max": 238.5048
+      },
+      "hasBuild": true,
+      "hasLog": true,
+      "count": 12
+    },
+    "diagnostics": {
+      "endToEnd": {
+        "n": 30,
+        "mean": 268.47666666669153,
+        "p50": 266.4000000022352,
+        "p95": 276.5,
+        "max": 314.70000000298023
+      },
+      "debounceMs": 250,
+      "sawCS1061": true
+    },
+    "offline": {
+      "origin": "app://localhost",
+      "resourceCount": 0,
+      "externalResources": [],
+      "externalFetchBlocked": true
+    },
+    "userAgent": "PhotinoX WebView"
+  },
+  "owner": {
+    "ownerSet": true,
+    "gameForegroundGranted": true,
+    "editorAboveGame": true,
+    "pingGameMs": 0.848,
+    "pingEditorMs": 0.1453,
+    "editorVisibleWhileOwnerMinimized": false,
+    "editorVisibleAfterRestore": true,
+    "editorAboveGameAfterRestore": true,
+    "editorFollowedOwnerMove": false,
+    "pingGameAfterMs": 0.1992,
+    "pingEditorAfterMs": 0.1052
+  },
+  "typing": {
+    "foregroundGranted": true,
+    "charsSent": 800,
+    "abortedBecauseFocusLost": false,
+    "identical": true,
+    "receivedLength": 800,
+    "firstMismatchIndex": -1
+  },
+  "memory": {
+    "totalWorkingSetMB": 1684.8,
+    "totalPrivateMB": 833,
+    "hostWorkingSetMB": 220.4,
+    "processes": [
+      {
+        "name": "dotnet",
+        "workingSetMB": 220.4,
+        "privateMB": 92
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 127.6,
+        "privateMB": 35.6
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 16,
+        "privateMB": 2.9
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 96.3,
+        "privateMB": 79.4
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 41.6,
+        "privateMB": 10.9
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 21.9,
+        "privateMB": 7.1
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 155.9,
+        "privateMB": 106.6
+      },
+      {
+        "name": "Unity Hub",
+        "workingSetMB": 223.8,
+        "privateMB": 148.2
+      },
+      {
+        "name": "Unity Hub",
+        "workingSetMB": 87.6,
+        "privateMB": 9.2
+      },
+      {
+        "name": "Unity Hub",
+        "workingSetMB": 259.9,
+        "privateMB": 171
+      },
+      {
+        "name": "Unity Hub",
+        "workingSetMB": 96.1,
+        "privateMB": 13
+      },
+      {
+        "name": "Unity Hub",
+        "workingSetMB": 154.7,
+        "privateMB": 80.8
+      },
+      {
+        "name": "unity",
+        "workingSetMB": 29.7,
+        "privateMB": 17.7
+      },
+      {
+        "name": "conhost",
+        "workingSetMB": 7.5,
+        "privateMB": 1.1
+      },
+      {
+        "name": "Unity Hub",
+        "workingSetMB": 145.9,
+        "privateMB": 57.5
+      }
+    ]
+  },
+  "pageErrors": [
+    "cspViolation: {\u0022directive\u0022:\u0022connect-src\u0022,\u0022blocked\u0022:\u0022https://example.com/\u0022}"
+  ],
+  "ownerClose": {
+    "editorWindowStillExists": true
+  }
+}

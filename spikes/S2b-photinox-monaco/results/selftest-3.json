@@ -1,0 +1,168 @@
+{
+  "roslynColdStart": {
+    "firstCompletionMs": 2180.8529,
+    "firstDiagnosticsMs": 278.7176
+  },
+  "pageReadyMsSinceStart": 5139.0192,
+  "pageReadyMsSinceWindowCreated": 1019.0056999999997,
+  "pageHref": "app://localhost/index.html",
+  "web": {
+    "completions": {
+      "roundTrip": {
+        "n": 200,
+        "mean": 12.220999999940396,
+        "p50": 11.099999997764826,
+        "p95": 16,
+        "max": 245.19999999925494
+      },
+      "server": {
+        "n": 200,
+        "mean": 11.323084,
+        "p50": 10.2344,
+        "p95": 15.1867,
+        "max": 225.4432
+      },
+      "hasBuild": true,
+      "hasLog": true,
+      "count": 12
+    },
+    "diagnostics": {
+      "endToEnd": {
+        "n": 30,
+        "mean": 269.15,
+        "p50": 266.8999999985099,
+        "p95": 279.19999999925494,
+        "max": 318
+      },
+      "debounceMs": 250,
+      "sawCS1061": true
+    },
+    "offline": {
+      "origin": "app://localhost",
+      "resourceCount": 0,
+      "externalResources": [],
+      "externalFetchBlocked": true
+    },
+    "userAgent": "PhotinoX WebView"
+  },
+  "owner": {
+    "ownerSet": true,
+    "gameForegroundGranted": true,
+    "editorAboveGame": true,
+    "pingGameMs": 0.8669,
+    "pingEditorMs": 0.2289,
+    "editorVisibleWhileOwnerMinimized": false,
+    "editorVisibleAfterRestore": true,
+    "editorAboveGameAfterRestore": true,
+    "editorFollowedOwnerMove": false,
+    "pingGameAfterMs": 0.3361,
+    "pingEditorAfterMs": 0.2706
+  },
+  "typing": {
+    "foregroundGranted": true,
+    "charsSent": 800,
+    "abortedBecauseFocusLost": false,
+    "identical": true,
+    "receivedLength": 800,
+    "firstMismatchIndex": -1
+  },
+  "embedded": {
+    "embedMs": 21.238,
+    "isChildOfGame": true,
+    "visible": true,
+    "panelMatchesExpected": true,
+    "pingGameMs": 0.179,
+    "pingEditorMs": 0.144,
+    "typingWindowed": {
+      "foregroundGranted": true,
+      "focusProbes": {
+        "setFocusPanel": {
+          "applied": true,
+          "sent": 30,
+          "received": 0
+        },
+        "setFocusChromium": {
+          "applied": true,
+          "sent": 30,
+          "received": 0
+        },
+        "guardedClick": {
+          "applied": false,
+          "sent": 30,
+          "received": 0
+        }
+      },
+      "workingFocusStrategy": null
+    },
+    "resize": {
+      "panelMatchedBeforeReposition": false,
+      "panelMatchesAfterReposition": true
+    },
+    "fullscreenBorderless": {
+      "screen": "1920x1080",
+      "isChildOfGame": true,
+      "visible": true,
+      "panelMatchesExpected": true,
+      "typing": {
+        "foregroundGranted": false,
+        "skipped": true,
+        "reason": "o jogo falso n\u00E3o ficou em primeiro plano"
+      }
+    },
+    "backToWindowed": {
+      "visible": true,
+      "panelMatchesExpected": true
+    },
+    "pingGameAfterMs": 0.2286,
+    "pingEditorAfterMs": 0.0927
+  },
+  "memory": {
+    "totalWorkingSetMB": 614.9,
+    "totalPrivateMB": 284.6,
+    "hostWorkingSetMB": 222.4,
+    "hostPrivateMB": 95.2,
+    "webView2PrivateMB": 189.4,
+    "webView2Version": "154.0.4258.62",
+    "processes": [
+      {
+        "name": "dotnet",
+        "workingSetMB": 222.4,
+        "privateMB": 95.2
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 127.5,
+        "privateMB": 36.2
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 16,
+        "privateMB": 2.9
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 77.5,
+        "privateMB": 72.8
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 39.9,
+        "privateMB": 10.8
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 22,
+        "privateMB": 7.1
+      },
+      {
+        "name": "msedgewebview2",
+        "workingSetMB": 109.7,
+        "privateMB": 59.7
+      }
+    ]
+  },
+  "externalNavigationBlocked": true,
+  "pageErrors": [
+    "cspViolation: {\u0022directive\u0022:\u0022connect-src\u0022,\u0022blocked\u0022:\u0022https://example.com/\u0022}"
+  ]
+}

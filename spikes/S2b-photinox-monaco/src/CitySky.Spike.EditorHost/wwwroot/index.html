@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- CSP do spike S2b: só conteúdo local; o worker do Monaco vem de blob (inline). -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; worker-src blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>CitySky — editor (spike S2b)</title>
+    <style>html,body{background:#1e1e1e;height:100%;margin:0;overflow:hidden}#editor{position:absolute;inset:0}</style>
+    <script type="module" crossorigin src="./assets/index-fxndUrwf.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Csy6Iug3.css">
+  </head>
+  <body>
+    <div id="editor"></div>
+  </body>
+</html>

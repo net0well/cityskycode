@@ -1,6 +1,9 @@
 # Spike S2b: Janela PhotinoX + Monaco + serviços de linguagem Roslyn
 
-- **Status:** Planejado
+- **Status:** **Em andamento** (testes executados em 2026-10-08; relatório completo pendente). Resultados brutos em `spikes/S2b-photinox-monaco/results/selftest-1..4.json`.
+
+> **Resumo parcial (2026-10-08):** completions p95 17 ms (meta 150); diagnósticos p95 272 ms com o debounce de 250 ms incluído (meta 400); digitação de 800 caracteres com acentos idêntica; memória 285 MB privados (host com Roslyn 95 + WebView2 190; meta 400); WebView2 154.0.4258.62; CSP e bloqueio de navegação externa confirmados; página pronta 1,6 s após criar a janela; primeira completion fria 2,1–2,3 s (aquecer em segundo plano).
+> **Mudança de requisito do dono do produto:** o editor fica **dentro da janela do jogo, no painel lateral direito**, e o jogo roda em janela e em tela cheia. A janela separada foi descartada. Testado como **janela-filha (WS_CHILD) de um "jogo" em outro processo**: embute em ~22 ms, ocupa o painel exato, funciona em janela e em tela cheia sem bordas (1920×1080), as duas janelas respondem em < 1 ms; ao redimensionar o jogo, o host precisa reposicionar o painel. **Foco:** SetFocus, WM_ACTIVATE e SetFocus no Chromium não entregam o teclado ao WebView2 embutido; **um clique no painel entrega** (300/300 e 200/200 caracteres idênticos). Pendências: foco programático (exige `CoreWebView2Controller.MoveFocus`, que o PhotinoX não expõe), tela cheia exclusiva (testar com a Unity no S2a), ADR do editor embutido, acentos por teclado ABNT2 (a máquina usa layout US; verificação manual).
 - **Prazo:** 2 dias · **Ordem:** 4º
 - **Depende de:** .NET SDK 10, Node.js, WebView2 Runtime (todos instalados) · **Bloqueia:** S2a (comparação), Fase 1 (E10)
 - **Código:** `spikes/S2b-photinox-monaco/` (descartável)
