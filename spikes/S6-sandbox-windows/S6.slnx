@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CitySky.Spike.Restricted/CitySky.Spike.Restricted.csproj" />
+    <Project Path="src/CitySky.Spike.Launcher/CitySky.Spike.Launcher.csproj" />
+  </Folder>
+</Solution>

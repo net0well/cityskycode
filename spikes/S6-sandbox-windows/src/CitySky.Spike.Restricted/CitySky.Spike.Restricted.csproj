@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Processo-filho restrito: faz o papel do Sandbox Worker sob a camada L5 do CODE_EXECUTION_SECURITY.md,
+       assumindo que as camadas de linguagem (L1/L2) foram contornadas. Cada argumento pede UMA ação;
+       o programa relata se o sistema operacional PERMITIU ou NEGOU. Serve para provar a contenção. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+</Project>
