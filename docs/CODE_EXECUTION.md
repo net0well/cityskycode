@@ -122,8 +122,11 @@ city.Policies.Garbage.Use(new NearestDepotRouting());
 - Arquivos com métodos `[Test]` (API NUnit: `Assert.That`, `Is.EqualTo`), descobertos por reflexão **dentro do Worker** (o runner do NUnit não é usado). Ver `TESTING.md` §B.
 
 ## 6. Protocolo Unity ↔ Code Host (`CitySky.Contracts`)
-- Transporte: **named pipe** com nome aleatório por sessão e ACL do usuário atual. Fallback: **TCP loopback** em porta efêmera + token de 256 bits no handshake (decisão final no spike S1, por causa do IL2CPP).
+- Transporte: **named pipe** com nome aleatório por sessão e ACL do usuário atual (padrão, confirmado no S1b pela segurança — sem superfície de rede). Fallback: **TCP loopback** em porta efêmera + token de 256 bits no handshake (habilitar só se o pipe gerenciado falhar numa máquina).
+- **Lançamento do Host/Worker: `CreateProcess` nativo (P/Invoke), nunca `System.Diagnostics.Process`.** O S1b mostrou que `Process.Start` **falha no player IL2CPP** nos dois modos (`UseShellExecute` false e true; exceção só diz "Success"). O lançamento nativo (mesmo caminho do `ISandboxLauncher`/S6) funciona. `IIpcTransport`/`ISandboxLauncher` nascem nativos na Fase 1.
+- **Pipes síncronos** no lado da Unity (`PipeOptions.None`): o IL2CPP quebra o *callback* de I/O assíncrono (`ThreadPoolBoundHandle::OnNativeIOCompleted`). Usar thread de I/O dedicada + fila para o main thread.
 - Enquadramento: `[uint32 length][json]`, limite de 8 MB por mensagem.
+- **Latência medida (S1b, player IL2CPP, win-x64):** ida-e-volta de 64 B ~1,4 ms (pipe) / ~0,1 ms (TCP); 8 MB ~15 ms; morte do Host detectada em ~3 ms; reinício+reconexão ~120 ms. O pipe no IL2CPP é mais lento que o TCP, então o protocolo **agrupa uma ida-e-volta por tick** (comandos em lote + *read models* em delta), não uma por comando. Pendências do S1b: validar Newtonsoft com `link.xml` (F1-13), ACL explícita do pipe e token do TCP (F1).
 - Envelope:
 ```json
 { "v": 1, "id": "c3f1…", "type": "CompileAndRun", "payload": { … } }

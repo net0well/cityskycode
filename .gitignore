@@ -60,3 +60,10 @@ spikes/**/results-run*.log
 spikes/**/results/*.json
 spikes/**/results/*.log
 spikes/S1a-codehost-pipeline/**/*.pdb
+# Saída de publish self-contained do echo host do S1b (~150 DLLs do runtime .NET; reproduzível com `dotnet publish`)
+spikes/**/publish/
+# Projeto Unity descartável do S1b fica fora do repo (C:\dev\unity-spikes\S1b); só os fontes em unity/Assets são versionados
+spikes/**/unity/[Ll]ibrary/
+spikes/**/unity/[Tt]emp/
+spikes/**/unity/[Oo]bj/
+spikes/**/unity/s1b-out/
