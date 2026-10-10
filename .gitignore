@@ -57,8 +57,12 @@ spikes/**/wwwroot/
 # Logs de execução dos spikes
 spikes/**/results-run*.log
 # Dumps de resultado dos spikes (reproduzíveis); as capturas de tela ficam versionadas
+spikes/**/results/**/*.json
+spikes/**/results/**/*.log
+spikes/**/results/**/*.csv
 spikes/**/results/*.json
 spikes/**/results/*.log
+spikes/**/results/*.csv
 spikes/S1a-codehost-pipeline/**/*.pdb
 # Saída de publish self-contained do echo host do S1b (~150 DLLs do runtime .NET; reproduzível com `dotnet publish`)
 spikes/**/publish/

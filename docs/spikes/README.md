@@ -1,6 +1,6 @@
 # Spikes
 
-> **Status:** 8 concluídos (S4a, S2b, S1a, S4b, S5, S1b, S2a) + S6 parcial (Job Object ok; AppContainer na Fase 9) · falta S3 e S7 · **Data:** 2026-10-10 · Plataforma: **Windows** (ADR-0018)
+> **Status:** 8 concluídos (S4a, S2b, S1a, S4b, S5, S1b, S2a) + S3 e S6 parciais · falta só S7 (precisa de Partner Center = ação do dono) · **Data:** 2026-10-10 · Plataforma: **Windows** (ADR-0018)
 > Spike = experimento curto, com prazo fixo, para responder **uma** pergunta de risco. O código de spike é **descartável**: fica em `spikes/<id>/` e nunca é copiado para `unity/` ou `dotnet/src/` sem ser reescrito.
 > Plano da fase: [`docs/phases/F00-research-and-spikes.md`](../phases/F00-research-and-spikes.md).
 
@@ -17,7 +17,7 @@ Primeiro o que não depende da Unity (dá para começar já), depois o que depen
 | 4 | **S2b** Janela PhotinoX + Monaco + completions do Roslyn | [S2b](S2b-photinox-monaco.md) | .NET 10 + Node | 2 d | S2a, F1 | ✅ **Concluído** (editor embutido no painel direito; ADR-0019) |
 | 5 | **S1b** Player Unity IL2CPP ↔ Code Host (named pipe; fallback TCP) | [S1b](S1b-il2cpp-ipc.md) | Unity, S1a | 2 d | S7, F1 | ✅ **Concluído** (IPC ok nos 2 backends; lançar por `CreateProcess` nativo — `Process.Start` falha no IL2CPP; ida-e-volta ~1,4 ms pipe / 0,1 ms TCP) |
 | 6 | **S2a** UnityWebBrowser no painel do jogo + **decisão do host** | [S2a](S2a-unitywebbrowser.md) | Unity, S2b | 2 d | F1 | ✅ **Concluído** (host = **WebView2 filho**; compõe sobre o swapchain sem flicker nos 3 estados + fullscreen; UWB rejeitado; itens visuais no checklist) |
-| 7 | **S3** Orçamento de renderização URP (5k prédios, 20k árvores, 1k agentes) | [S3](S3-urp-render-budget.md) | Unity + **PC com GPU integrada** | 3 d | gate F2 | Planejado |
+| 7 | **S3** Orçamento de renderização URP (5k prédios, 20k árvores, 1k agentes) | [S3](S3-urp-render-budget.md) | Unity + **PC com GPU integrada** | 3 d | gate F2 | ⚠️ **Parcial** (teto RX 7600: FPS p5 ≥ 269, GPU ~0,3 ms, GRD ok; **mínimo Iris Xe pendente** + agentes não *skinned*) |
 | 8 | **S4b** Fator Mono/IL2CPP + hash entre runtimes | [S4b](S4b-mono-il2cpp-factor.md) | S4a, Unity | 1 d | F5 | ✅ **Concluído** (IL2CPP 1,34× o .NET; hash idêntico nos 4 runtimes) |
 | 9 | **S5** Malha de ruas e interseções em runtime | [S5](S5-road-mesh.md) | Unity | 3 d | F3 | ✅ **Concluído** (12/12 configs sem artefatos; 96 interseções em 1,4 ms) |
 | 10 | **S7** MSIX sem admin + Microsoft Store + política de código dinâmico | [S7](S7-msix-store.md) | S1b, S6, Partner Center | 2 d | F1 | Planejado |
