@@ -48,7 +48,7 @@ csharp_style_expression_bodied_methods = when_on_single_line:suggestion
 csharp_prefer_braces = true:warning
 csharp_style_namespace_declarations = file_scoped:suggestion
 dotnet_style_readonly_field = true:warning
-dotnet_style_require_accessibility_modifiers = always:warning
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning
 
 # Nomenclatura
 dotnet_naming_rule.types_pascal.severity = warning
@@ -82,6 +82,14 @@ dotnet_diagnostic.IDE0301.severity = none
 dotnet_diagnostic.IDE0303.severity = none
 dotnet_diagnostic.IDE0304.severity = none
 csharp_style_expression_bodied_methods = when_on_single_line:none
+
+# Estilo deliberado do domínio (DOMAIN_MODEL §3.1): value types com campos públicos readonly
+# (determinismo, SoA, structs de valor) e constantes nomeadas `= default`. Os analyzers que
+# brigam com isso ficam desligados só na fonte compartilhada.
+dotnet_diagnostic.CA1051.severity = none   # campos de instância públicos (Value, Cents, Raw, ...)
+dotnet_diagnostic.CA1805.severity = none   # membros estáticos inicializados com default (None, Zero)
+dotnet_diagnostic.CA1711.severity = none   # nomes de domínio como CommandQueue (docs)
+dotnet_diagnostic.CA1815.severity = none   # structs de evento/DTO sem Equals
 
 # Arquivos gerados / de terceiros
 [unity/**/{Library,Temp,obj,Build}/**]

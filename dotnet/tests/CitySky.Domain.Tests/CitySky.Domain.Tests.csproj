@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CitySky.Domain\CitySky.Domain.csproj" />
+    <ProjectReference Include="..\..\src\CitySky.Application\CitySky.Application.csproj" />
   </ItemGroup>
 
 </Project>

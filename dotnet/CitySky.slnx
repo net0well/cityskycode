@@ -11,5 +11,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/CitySky.Domain.Tests/CitySky.Domain.Tests.csproj" />
+    <Project Path="tests/CitySky.Architecture.Tests/CitySky.Architecture.Tests.csproj" />
   </Folder>
 </Solution>
