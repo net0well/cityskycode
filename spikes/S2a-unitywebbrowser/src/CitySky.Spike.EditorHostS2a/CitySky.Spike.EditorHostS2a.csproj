@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Spike S2a: host do editor (PhotinoX/WebView2) reparentado como janela-filha do PLAYER UNITY real.
+       Mede composição sobre o swapchain, estados do painel, digitação e memória. Sem Roslyn (o S2b já
+       mediu os serviços de linguagem; aqui respondemos vazio às mensagens de completion/diagnostics). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);SYSLIB1054</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PhotinoX" Version="5.3.5" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

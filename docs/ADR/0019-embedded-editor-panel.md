@@ -54,7 +54,11 @@ O spike S2b testou (B) numa nova forma: a janela do PhotinoX (WebView2) vira **j
 ## Gatilhos de revisão
 Resultado do S2a · Unity lançar um componente de web view oficial · problema de DPI ou foco sem solução · decisão de suportar Steam Deck (Fase 21+), onde o editor dentro do jogo já era o plano (ADR-0018).
 
+## Confirmação no S2a (2026-10-10)
+O spike S2a validou este ADR no **player Unity IL2CPP real** (não mais numa janela WinForms como no S2b): o editor WebView2 como `WS_CHILD` **compõe de forma estável sobre o swapchain DXGI** da Unity, sem flicker, nos três estados (minimizado/normal/expandido) e em **tela cheia sem bordas** (1920×1080), com o painel sempre no retângulo esperado e custo ~0 no main thread da Unity. Captura: `docs/spikes/S2a-unitywebbrowser.md` → `results/screenshots/`. Pendências de implementação (F1-52): foco por gesto, retângulo enviado pela Unity, action maps desligados com o editor em foco; itens visuais (IME/DPI/DX12) no checklist humano do relatório.
+
 ## Referências
+- Relatório do S2a: [`docs/spikes/S2a-unitywebbrowser.md`](../spikes/S2a-unitywebbrowser.md)
 - Relatório do S2b: [`docs/spikes/S2b-photinox-monaco.md`](../spikes/S2b-photinox-monaco.md)
 - Unity `FullScreenMode`: https://docs.unity3d.com/ScriptReference/FullScreenMode.html
 - WebView2 `CoreWebView2Controller.MoveFocus`: https://learn.microsoft.com/microsoft-edge/webview2/reference/win32/icorewebview2controller#movefocus
