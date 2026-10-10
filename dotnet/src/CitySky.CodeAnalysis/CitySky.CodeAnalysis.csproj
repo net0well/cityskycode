@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Allowlist, analyzers pedagógicos e verificador de IL (Roslyn). C# 14. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.CodeAnalysis</RootNamespace>
+    <AssemblyName>CitySky.CodeAnalysis</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <ProjectReference Include="..\CitySky.Contracts\CitySky.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

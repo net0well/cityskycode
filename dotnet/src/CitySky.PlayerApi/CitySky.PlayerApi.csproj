@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- API pública do jogador (XML docs pt-BR) + implementações de gateway. C# 14. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky</RootNamespace>
+    <AssemblyName>CitySky.PlayerApi</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CitySky.Domain\CitySky.Domain.csproj" />
+    <ProjectReference Include="..\CitySky.Application\CitySky.Application.csproj" />
+    <ProjectReference Include="..\CitySky.Contracts\CitySky.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CitySky.Domain/CitySky.Domain.csproj" />
+    <Project Path="src/CitySky.Application/CitySky.Application.csproj" />
+    <Project Path="src/CitySky.Contracts/CitySky.Contracts.csproj" />
+    <Project Path="src/CitySky.Education/CitySky.Education.csproj" />
+    <Project Path="src/CitySky.PlayerApi/CitySky.PlayerApi.csproj" />
+    <Project Path="src/CitySky.CodeAnalysis/CitySky.CodeAnalysis.csproj" />
+    <Project Path="src/CitySky.CodeHost/CitySky.CodeHost.csproj" />
+    <Project Path="src/CitySky.Sandbox.Worker/CitySky.Sandbox.Worker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CitySky.Domain.Tests/CitySky.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

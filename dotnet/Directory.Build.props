@@ -1,0 +1,24 @@
+<Project>
+
+  <!-- F1-03. Propriedades comuns a toda a solução .NET.
+       Overrides por projeto: LangVersion 9 na fonte compartilhada (netstandard2.1);
+       TreatWarningsAsErrors=false nos testes (dotnet/tests/Directory.Build.props). -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <!-- Portabilidade (ADR-0018): usar API exclusiva de plataforma fora das implementações
+       específicas falha a build. As implementações de SO suprimem CA1416 localmente. -->
+  <PropertyGroup>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>
