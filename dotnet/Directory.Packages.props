@@ -19,6 +19,9 @@
 
     <!-- Code Host: Generic Host + logging -->
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+
+    <!-- Serialização do protocolo (mesma lib do lado Unity: com.unity.nuget.newtonsoft-json) -->
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
