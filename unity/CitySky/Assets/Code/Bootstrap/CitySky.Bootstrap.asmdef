@@ -1,0 +1,20 @@
+{
+    "name": "CitySky.Bootstrap",
+    "rootNamespace": "CitySky.Bootstrap",
+    "references": [
+        "CitySky.Application",
+        "CitySky.Domain",
+        "CitySky.Contracts",
+        "CitySky.Infrastructure",
+        "CitySky.Presentation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

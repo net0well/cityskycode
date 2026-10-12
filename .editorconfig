@@ -90,6 +90,7 @@ dotnet_diagnostic.CA1051.severity = none   # campos de instância públicos (Val
 dotnet_diagnostic.CA1805.severity = none   # membros estáticos inicializados com default (None, Zero)
 dotnet_diagnostic.CA1711.severity = none   # nomes de domínio como CommandQueue (docs)
 dotnet_diagnostic.CA1815.severity = none   # structs de evento/DTO sem Equals
+dotnet_diagnostic.CA1716.severity = none   # nomes como ILog.Error (API interna só-C#)
 
 # Arquivos gerados / de terceiros
 [unity/**/{Library,Temp,obj,Build}/**]

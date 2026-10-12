@@ -4,6 +4,8 @@
     "references": [
         "CitySky.Domain",
         "CitySky.Application",
+        "CitySky.Infrastructure",
+        "CitySky.Bootstrap",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],
