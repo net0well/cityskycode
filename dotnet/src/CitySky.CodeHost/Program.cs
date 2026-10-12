@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using CitySky.CodeAnalysis;
 using CitySky.CodeHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,11 @@ HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton(_ => ReferenceSet.Create());
 builder.Services.AddSingleton<Pipeline>();
-builder.Services.AddSingleton<ISandboxLauncher>(_ => new ProcessSandboxLauncher());
+// No Windows, o Worker roda num Job Object (F1-51); no canário Linux, um processo simples.
+builder.Services.AddSingleton<ISandboxLauncher>(_ =>
+    RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+        ? new JobObjectSandboxLauncher()
+        : new ProcessSandboxLauncher());
 builder.Services.AddSingleton<WorkerPool>();
 builder.Services.AddSingleton<RunCoordinator>();
 builder.Services.AddSingleton<CodeHostServer>();

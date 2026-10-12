@@ -7,6 +7,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>CitySky.CodeHost</RootNamespace>
     <AssemblyName>CitySky.CodeHost</AssemblyName>
+    <!-- LibraryImport (P/Invoke do Job Object) gera stubs com unsafe; o Host é processo confiável. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- Logging de alta performance (LoggerMessage source-gen) é um follow-up; v0 loga pouco. -->
     <NoWarn>$(NoWarn);CA1848;CA1873</NoWarn>
   </PropertyGroup>
