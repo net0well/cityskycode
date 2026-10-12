@@ -4,9 +4,6 @@ using System.Text;
 
 namespace CitySky.Runtime;
 
-/// <summary>Pedido de execução enviado do Code Host ao Worker.</summary>
-public sealed record WorkerRequest(byte[] Assembly, byte[] Pdb, SandboxBudgets Budgets);
-
 /// <summary>
 /// Canal binário Host ↔ Worker (sobre stdin/stdout do Worker). Binário porque o assembly é binário;
 /// JSON com base64 seria desperdício. Cada mensagem é autodescrita pelos seus comprimentos. F1-72.

@@ -3,16 +3,6 @@ using System.Globalization;
 
 namespace CitySky.Domain
 {
-    /// <summary>Fase do dia (TC), derivada da hora.</summary>
-    public enum DayPhase
-    {
-        Night = 0,
-        Dawn = 1,
-        Morning = 2,
-        Afternoon = 3,
-        Evening = 4,
-    }
-
     /// <summary>
     /// Relógio da simulação: tudo é função do número do tick (SIMULATION_TICK §2). F1-31.
     /// 1 tick = 0,25 s TM = 7,5 s TC. 8 ticks = 1 min TC; 480 = 1 h; 11 520 = 1 dia.

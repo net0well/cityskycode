@@ -2,37 +2,8 @@ using System;
 
 namespace CitySky.Runtime;
 
-/// <summary>Motivo pelo qual o orçamento estourou (CODE_EXECUTION_SECURITY.md, L3).</summary>
-public enum BudgetReason
-{
-    None = 0,
-    Loop = 1,
-    Recursion = 2,
-    Memory = 3,
-    Output = 4,
-}
-
 /// <summary>
-/// Orçamento estourado. O aluno não consegue "engolir" esta exceção: o estado fica marcado e qualquer
-/// chamada seguinte ao orçamento lança de novo; os <c>catch</c> do aluno recebem um filtro que não deixa
-/// capturá-la (o rewriter injeta <c>when (!__Budget.Exceeded)</c>).
-/// </summary>
-public sealed class BudgetExceededException : Exception
-{
-    public BudgetExceededException(BudgetReason reason, int line)
-        : base($"Orçamento estourado ({reason}) na linha {line}.")
-    {
-        Reason = reason;
-        Line = line;
-    }
-
-    public BudgetReason Reason { get; }
-
-    public int Line { get; }
-}
-
-/// <summary>
-/// Chamadas injetadas pelo reescritor de orçamento do Code Host. O código do aluno não as chama
+/// Chamadas injetadas pelo reescritor de orçamento do Code Host. O código do jogador não as chama
 /// diretamente (a allowlist L1 barra o tipo; só o código gerado as referencia). Uma execução por vez
 /// por processo Worker, então estado estático é aceitável.
 /// </summary>

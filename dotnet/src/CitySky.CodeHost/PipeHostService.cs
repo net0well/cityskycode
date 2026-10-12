@@ -8,9 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace CitySky.CodeHost;
 
-/// <summary>Nome do pipe da sessão (da linha de comando da Unity, ou gerado).</summary>
-public sealed record PipeConfig(string? Name);
-
 /// <summary>
 /// Serviço hospedado: aquece o Roslyn, abre o named pipe da sessão e atende a Unity, reabrindo para o
 /// próximo cliente quando um desconecta, até o host parar (F1-70).

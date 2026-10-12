@@ -3,47 +3,6 @@ using System.Collections.Generic;
 
 namespace CitySky.Domain
 {
-    /// <summary>Erros tipados de comando (falhas esperadas, não exceções). ARCHITECTURE §9.</summary>
-    public enum CommandError
-    {
-        None = 0,
-        InsufficientFunds = 1,
-        InvalidTarget = 2,
-        NotUnlocked = 3,
-        Rejected = 4,
-    }
-
-    /// <summary>Resultado da aplicação de um comando.</summary>
-    public readonly struct CommandResult : IEquatable<CommandResult>
-    {
-        public readonly bool Success;
-        public readonly CommandError Error;
-
-        private CommandResult(bool success, CommandError error)
-        {
-            Success = success;
-            Error = error;
-        }
-
-        public static readonly CommandResult Ok = new CommandResult(true, CommandError.None);
-        public static CommandResult Fail(CommandError error) => new CommandResult(false, error);
-
-        public bool Equals(CommandResult other) => Success == other.Success && Error == other.Error;
-        public override bool Equals(object? obj) => obj is CommandResult o && Equals(o);
-        public override int GetHashCode() => (Success ? 1 : 0) ^ ((int)Error << 1);
-        public static bool operator ==(CommandResult a, CommandResult b) => a.Equals(b);
-        public static bool operator !=(CommandResult a, CommandResult b) => !a.Equals(b);
-        public override string ToString() => Success ? "Ok" : "Fail(" + Error + ")";
-    }
-
-    /// <summary>
-    /// Toda mutação de estado é um comando validado (regra inviolável). Aplicado no tick alvo.
-    /// </summary>
-    public interface ICityCommand
-    {
-        CommandResult Apply(CityState state, in SimulationContext context);
-    }
-
     /// <summary>
     /// Fila de comandos ordenada por <c>(targetTick, seq)</c> — determinística (F1-34).
     /// </summary>

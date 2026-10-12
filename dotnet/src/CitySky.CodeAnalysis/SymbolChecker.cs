@@ -6,9 +6,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CitySky.CodeAnalysis;
 
-/// <summary>Um achado de análise (código pedagógico CSK, mensagem pt-BR, linha).</summary>
-public sealed record Finding(string Code, string Message, int Line);
-
 /// <summary>
 /// L1 (CODE_EXECUTION_SECURITY.md): percorre a árvore do jogador e, pelo modelo semântico, confere cada
 /// tipo e membro referenciado contra a <see cref="Allowlist"/>. Também barra construções sintáticas

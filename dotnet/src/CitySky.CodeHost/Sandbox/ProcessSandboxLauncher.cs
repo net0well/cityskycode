@@ -4,28 +4,6 @@ using System.IO;
 
 namespace CitySky.CodeHost;
 
-/// <summary>Processo Worker em execução, com os fluxos binários do canal Host ↔ Worker.</summary>
-public interface ISandboxProcess : IDisposable
-{
-    Stream StandardInput { get; }
-
-    Stream StandardOutput { get; }
-
-    bool HasExited { get; }
-
-    void Kill();
-}
-
-/// <summary>
-/// Inicia o processo Worker. No produto o Worker roda dentro de um Job Object com limites rígidos
-/// (F1-51, spike S6); esta implementação v0 usa um processo com stdio redirecionado (portável).
-/// A abstração deixa a troca pelo lançador com Job Object sem tocar no resto (ADR-0018).
-/// </summary>
-public interface ISandboxLauncher
-{
-    ISandboxProcess Launch();
-}
-
 /// <summary>Lançador v0: <see cref="Process"/> com stdin/stdout redirecionados. Sem API exclusiva de SO.</summary>
 public sealed class ProcessSandboxLauncher : ISandboxLauncher
 {

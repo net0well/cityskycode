@@ -11,20 +11,6 @@ using Microsoft.CodeAnalysis.Emit;
 
 namespace CitySky.CodeAnalysis;
 
-public sealed record StageTimings(double ParseMs, double L1Ms, double RewriteMs, double CompileMs, double EmitMs, double L2Ms)
-{
-    public double TotalMs => ParseMs + L1Ms + RewriteMs + CompileMs + EmitMs + L2Ms;
-}
-
-public sealed record CompileResult(
-    bool Ok,
-    string Stage,                         // syntax | L1 | compile | L2 | emitted
-    IReadOnlyList<Finding> Findings,
-    IReadOnlyList<string> Diagnostics,
-    byte[]? Assembly,
-    byte[]? Pdb,
-    StageTimings Timings);
-
 /// <summary>Pipeline do Code Host: Parse → L1 → Reescrita → Compilação → Emissão → L2 (F1-71).</summary>
 public sealed class Pipeline
 {

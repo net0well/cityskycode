@@ -3,15 +3,10 @@ using System.Collections.Generic;
 
 namespace CitySky.Domain
 {
-    /// <summary>Marcador de evento de domínio. Implementações são <c>readonly struct</c>.</summary>
-    public interface IDomainEvent
-    {
-    }
-
     /// <summary>
     /// Acumula eventos durante o tick e os publica <b>depois</b> dele, em ordem determinística (F1-35).
-    /// Proibido callback do domínio direto para a Unity: assinantes são read models/sistemas.
-    /// (Boxing de structs aqui é aceito no esqueleto; buffers tipados por evento virão na escala — O8.)
+    /// Padrão Observer: assinantes (read models/sistemas) reagem; proibido callback direto do domínio
+    /// para a Unity. (Boxing de structs aqui é aceito no esqueleto; buffers tipados virão na escala — O8.)
     /// </summary>
     public sealed class DomainEventBuffer
     {
@@ -44,7 +39,6 @@ namespace CitySky.Domain
         /// <summary>Despacha os eventos pendentes na ordem de emissão e limpa o buffer.</summary>
         public void Flush()
         {
-            // Índice explícito: a ordem de emissão é a ordem de despacho.
             for (int i = 0; i < _pending.Count; i++)
             {
                 IDomainEvent e = _pending[i];

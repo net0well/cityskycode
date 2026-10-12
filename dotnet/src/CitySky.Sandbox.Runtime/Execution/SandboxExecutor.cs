@@ -7,29 +7,6 @@ using System.Text;
 
 namespace CitySky.Runtime;
 
-public enum SandboxStatus
-{
-    Ok = 0,
-    Budget = 1,
-    Exception = 2,
-    Invalid = 3,
-}
-
-/// <summary>Resultado de uma execução isolada.</summary>
-public sealed record SandboxResult(
-    SandboxStatus Status,
-    string? Reason,
-    int Line,
-    string? ExceptionType,
-    string? Message,
-    string Console,
-    bool Truncated,
-    double LoadMs,
-    double RunMs);
-
-/// <summary>Orçamentos de uma execução.</summary>
-public sealed record SandboxBudgets(long BudgetTicks, int MaxDepth, long AllocationLimitBytes, int OutputLimitChars);
-
 /// <summary>
 /// Carrega e executa o assembly do jogador num <see cref="AssemblyLoadContext"/> coletável, com o
 /// console redirecionado para um buffer limitado e o orçamento (<see cref="__Budget"/>) armado. O ALC
