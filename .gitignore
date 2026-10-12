@@ -23,6 +23,8 @@ unity/**/sysinfo.txt
 unity/**/crashlytics-build.properties
 # Bundle do Monaco gerado a partir de editor-web/
 unity/**/StreamingAssets/editor-web/
+# Code Host publicado em StreamingAssets (reproduzível com `dotnet publish`)
+unity/**/StreamingAssets/codehost/
 # Logs e resultados de teste do projeto Unity (na raiz do projeto)
 unity/**/*.log
 unity/**/*-results.xml
@@ -75,3 +77,4 @@ spikes/**/unity/[Ll]ibrary/
 spikes/**/unity/[Tt]emp/
 spikes/**/unity/[Oo]bj/
 spikes/**/unity/s1b-out/
+unity/**/StreamingAssets/codehost.meta
