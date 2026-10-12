@@ -14,6 +14,7 @@
     <Project Path="tests/CitySky.Domain.Tests/CitySky.Domain.Tests.csproj" />
     <Project Path="tests/CitySky.Contracts.Tests/CitySky.Contracts.Tests.csproj" />
     <Project Path="tests/CitySky.Security.Tests/CitySky.Security.Tests.csproj" />
+    <Project Path="tests/CitySky.CodeHost.Tests/CitySky.CodeHost.Tests.csproj" />
     <Project Path="tests/CitySky.Architecture.Tests/CitySky.Architecture.Tests.csproj" />
   </Folder>
 </Solution>

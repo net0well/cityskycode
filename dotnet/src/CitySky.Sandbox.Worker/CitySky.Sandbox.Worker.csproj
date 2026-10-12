@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <!-- Execução isolada do código do jogador (ALC coletável, orçamentos). Executável. C# 14. -->
+  <!-- Execução isolada do código do jogador (ALC coletável, orçamentos). Lê pedidos por stdin e
+       responde por stdout (canal binário). No produto roda dentro de um Job Object (F1-51). C# 14. -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
@@ -9,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CitySky.Contracts\CitySky.Contracts.csproj" />
+    <ProjectReference Include="..\CitySky.Sandbox.Runtime\CitySky.Sandbox.Runtime.csproj" />
     <ProjectReference Include="..\CitySky.PlayerApi\CitySky.PlayerApi.csproj" />
   </ItemGroup>
 

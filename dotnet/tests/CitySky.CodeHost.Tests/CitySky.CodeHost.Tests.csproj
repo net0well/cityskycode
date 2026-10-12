@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.CodeHost.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CitySky.CodeHost\CitySky.CodeHost.csproj" />
+    <!-- Garante o Worker.exe e as dlls (PlayerApi, Runtime) na pasta do teste. -->
+    <ProjectReference Include="..\..\src\CitySky.Sandbox.Worker\CitySky.Sandbox.Worker.csproj" />
+  </ItemGroup>
+
+</Project>
