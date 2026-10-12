@@ -119,7 +119,8 @@ Detalhes: `CODE_EXECUTION.md`, `CODE_EXECUTION_SECURITY.md`, `CODE_EDITOR.md`.
 | `CitySky.PlayerApi` | `net10.0` | API pública do jogador (com XML docs pt-BR) + implementações de gateway |
 | `CitySky.CodeAnalysis` | `net10.0` | Analyzers de allowlist, analyzers pedagógicos, verificador de IL |
 | `CitySky.CodeHost` | `net10.0` (exe) | Servidor IPC, Roslyn workspace, pipeline, gerência de workers |
-| `CitySky.Sandbox.Worker` | `net10.0` (exe) | Execução isolada |
+| `CitySky.Sandbox.Runtime` | `net10.0` | Runtime de orçamento (`__Budget`, injetado pelo rewriter) + executor em ALC coletável + canal Host↔Worker. Referenciado pelo Worker (execução) e pelo Code Host (referências de compilação). *Acrescentado na Fase 1 (F1-72).* |
+| `CitySky.Sandbox.Worker` | `net10.0` (exe) | Execução isolada (lê pedidos do Host por stdin, roda via Sandbox.Runtime) |
 | `tests/*` | `net10.0` | NUnit 4: Domain, Application, Contracts (golden JSON), CodeAnalysis, CodeHost, **Security**, **Content**, **Architecture** |
 
 ### 4.3 Fonte única do domínio ("shared source")

@@ -153,6 +153,8 @@ city.Policies.Garbage.Use(new NearestDepotRouting());
 - **Versionamento:** `protocolVersion` inteiro. Unity e Host são distribuídos juntos, mas o handshake rejeita versões diferentes com mensagem clara.
 - **Testes de contrato:** golden files JSON em `dotnet/tests/CitySky.Contracts.Tests` (desserializar → serializar → comparar).
 
+> **Implementado na Fase 1 (v0, 2026-10-12):** `CitySky.Contracts` tem o `Protocol` (versão, limite 8 MB), `MessageFraming` (`[uint32 len][bytes]`) e as mensagens `Hello/CompileAndRun/RunResult/Diagnostics/Cancel` (classes imutáveis C# 9) com golden JSON. O pipeline `Parse→L1→reescrita→compilação→emissão→L2` está em `CitySky.CodeAnalysis`; a execução isolada (ALC coletável + orçamentos) em `CitySky.Sandbox.Runtime`/`CitySky.Sandbox.Worker`; o Code Host (Generic Host + named pipe + `WorkerPool` com 1 worker quente) em `CitySky.CodeHost`. **Lançamento do Worker: `Process` com stdio redirecionado (v0); o Job Object (F1-51) e a ACL explícita do pipe (F1-50) ficam para a sequência da Fase 1.** Corpus de segurança em `CitySky.Security.Tests`.
+
 ## 7. Orçamentos padrão
 | Recurso | Script | Laboratório | Comportamento (por lote) |
 |---|---|---|---|

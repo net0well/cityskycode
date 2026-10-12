@@ -1,6 +1,18 @@
 # Fase 1 — Fundação (walking skeleton)
 
-> **Status:** Planejada · **Bloco:** A · **Atualizado:** 2026-10-08
+> **Status:** Em andamento (lado .NET) · **Bloco:** A · **Atualizado:** 2026-10-12
+>
+> **Progresso (2026-10-12), 68 testes verdes em `dotnet/CitySky.slnx`:**
+> - ✅ **E1** (F1-01..04): `.editorconfig`, `global.json`, `Directory.Build.props`, CPM, `CitySky.slnx`.
+> - ✅ **E3** (F1-20..22): fonte compartilhada (Domain/Application/Contracts/Education, netstandard2.1 C# 9) + shim `IsExternalInit` + testes de arquitetura.
+> - ✅ **E4** (F1-30..38): núcleo determinístico (valores, IDs, `Pcg32`, `XxHash64`, `SimulationClock`, sistemas + `Simulation.RunTick`, `CommandQueue`, `DomainEventBuffer`, `HeadlessSimulation`).
+> - ✅ **E7** (F1-60..61): Contracts v1 (framing + mensagens + golden JSON).
+> - ⚠️ **E8** parcial: ✅ F1-71 (pipeline L1/rewrite/L2), F1-72 (execução no Worker em processo), F1-73 (pool), F1-75 (corpus de segurança), F1-70 (Code Host Generic Host + named pipe), F1-80 (Player API v0). Falta **F1-51** (Job Object), **F1-50** (ACL do pipe), **F1-74** (Unity inicia o Host).
+> - ⏳ **Falta:** E2 (projeto Unity F1-10..13), E5 (runner/CommandBus/composition root), E6 restante (IIpcTransport/ICodeEditorHost/IPlatformServices/IFileLocations), E9 revisão, E10 (editor+console), E11 (localização+save/load), E12 (determinismo no lado Unity), workflows de CI (F1-05..07).
+>
+> **Convenção do dono (2026-10-12):** um tipo por arquivo em pastas; aplicar design patterns onde cabem (ver `CODING_STANDARDS.md` §2).
+
+> **Status original:** Planejada · **Bloco:** A · **Atualizado:** 2026-10-08
 > **Entrada:** gate da Fase 0 (S1, S2, S6, S7 resolvidos; transporte IPC, mecanismo de sandbox e host do editor decididos) · **Saída:** `city.Log("Olá")` digitado no jogo aparece no console **e** o teste de hash passa em Mono e .NET 10 · **Estimativa:** 6 semanas
 
 ---
