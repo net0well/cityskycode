@@ -1,0 +1,32 @@
+name: dotnet-windows
+
+# F1-05: build + testes da solução .NET em todo PR e push na main (Windows, plataforma primária).
+on:
+  pull_request:
+    paths:
+      - 'dotnet/**'
+      - 'unity/CitySky/Packages/com.citysky.core/**'
+      - '.github/workflows/dotnet-windows.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'dotnet/**'
+      - 'unity/CitySky/Packages/com.citysky.core/**'
+      - '.github/workflows/dotnet-windows.yml'
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: dotnet/global.json
+
+      - name: Build (Release)
+        run: dotnet build dotnet/CitySky.slnx -c Release
+
+      - name: Testes
+        run: dotnet test dotnet/CitySky.slnx -c Release --no-build --verbosity normal

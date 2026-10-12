@@ -1,0 +1,34 @@
+name: dotnet-linux
+
+# F1-06: canário de portabilidade (ADR-0018). O mesmo build e testes num runner Linux.
+# O código específico de Windows fica atrás de interfaces/[SupportedOSPlatform]; o fixture do Job
+# Object ([Platform Win]) se auto-pula, e o Code Host usa o ProcessSandboxLauncher aqui.
+on:
+  pull_request:
+    paths:
+      - 'dotnet/**'
+      - 'unity/CitySky/Packages/com.citysky.core/**'
+      - '.github/workflows/dotnet-linux.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'dotnet/**'
+      - 'unity/CitySky/Packages/com.citysky.core/**'
+      - '.github/workflows/dotnet-linux.yml'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: dotnet/global.json
+
+      - name: Build (Release)
+        run: dotnet build dotnet/CitySky.slnx -c Release
+
+      - name: Testes (Job Object pulado automaticamente em Linux)
+        run: dotnet test dotnet/CitySky.slnx -c Release --no-build --verbosity normal
