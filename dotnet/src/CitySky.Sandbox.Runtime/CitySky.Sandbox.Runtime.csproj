@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Runtime de orçamento (injetado pelo rewriter) + executor em ALC coletável. Referenciado pelo
+       Worker (execução) e pelo Code Host (referências de compilação). Só BCL. C# 14. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.Runtime</RootNamespace>
+    <AssemblyName>CitySky.Sandbox.Runtime</AssemblyName>
+    <!-- __Budget tem esse nome de propósito: é infra injetada pelo rewriter, barrada ao jogador na allowlist. -->
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
+  </PropertyGroup>
+
+</Project>
