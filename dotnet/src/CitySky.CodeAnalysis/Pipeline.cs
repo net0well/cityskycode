@@ -19,6 +19,64 @@ public sealed class Pipeline
 
     public Pipeline(ReferenceSet references) => _references = references;
 
+    /// <summary>
+    /// Diagnósticos ao digitar (F1-93): compila sem executar e devolve os erros/avisos do compilador C#
+    /// mais os achados da allowlist (L1), como <see cref="Contracts.Diagnostic"/>. Não reescreve nem emite.
+    /// </summary>
+    public IReadOnlyList<Contracts.Diagnostic> Diagnose(string source)
+    {
+        SyntaxTree tree = CSharpSyntaxTree.ParseText(source ?? string.Empty, Parse, path: "Program.cs", encoding: Encoding.UTF8);
+        var options = new CSharpCompilationOptions(OutputKind.ConsoleApplication,
+            optimizationLevel: OptimizationLevel.Debug, allowUnsafe: false, deterministic: true);
+        CSharpCompilation compilation = CSharpCompilation.Create("StudentProgram", new[] { tree }, _references.References, options);
+
+        var result = new List<Contracts.Diagnostic>();
+        foreach (Diagnostic d in compilation.GetDiagnostics())
+        {
+            if (d.Severity == DiagnosticSeverity.Hidden)
+            {
+                continue;
+            }
+
+            FileLinePositionSpan span = d.Location.GetLineSpan();
+            result.Add(new Contracts.Diagnostic
+            {
+                Id = d.Id,
+                Severity = MapSeverity(d.Severity),
+                Message = d.GetMessage(CultureInfo.InvariantCulture),
+                StartLine = span.StartLinePosition.Line + 1,
+                StartColumn = span.StartLinePosition.Character + 1,
+                EndLine = span.EndLinePosition.Line + 1,
+                EndColumn = span.EndLinePosition.Character + 1,
+            });
+        }
+
+        SemanticModel model = compilation.GetSemanticModel(tree);
+        foreach (Finding f in SymbolChecker.Check(model, tree.GetRoot()))
+        {
+            result.Add(new Contracts.Diagnostic
+            {
+                Id = f.Code,
+                Severity = Contracts.DiagnosticSeverity.Error,
+                Message = f.Message,
+                StartLine = f.Line,
+                StartColumn = 1,
+                EndLine = f.Line,
+                EndColumn = 1,
+            });
+        }
+
+        return result;
+    }
+
+    private static Contracts.DiagnosticSeverity MapSeverity(DiagnosticSeverity severity) => severity switch
+    {
+        DiagnosticSeverity.Error => Contracts.DiagnosticSeverity.Error,
+        DiagnosticSeverity.Warning => Contracts.DiagnosticSeverity.Warning,
+        DiagnosticSeverity.Info => Contracts.DiagnosticSeverity.Info,
+        _ => Contracts.DiagnosticSeverity.Hidden,
+    };
+
     /// <param name="enforceL1">quando falso, pula o bloqueio de L1 (para provar que L2 pega sozinho).</param>
     public CompileResult Compile(string source, bool enforceL1 = true)
     {

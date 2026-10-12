@@ -49,5 +49,20 @@ namespace CitySky.EditModeTests
             Assert.That(result.Success, Is.False);
             Assert.That(result.Error, Is.Not.Null);
         }
+
+        [Test]
+        public void Diagnostics_While_Typing_Flag_Banned_Api()
+        {
+            if (!File.Exists(HostExe))
+            {
+                Assert.Ignore("Code Host não publicado em StreamingAssets/codehost (dotnet publish).");
+            }
+
+            using var client = new CodeHostClient();
+            client.Start(HostExe);
+
+            var diags = client.GetDiagnostics("System.IO.File.ReadAllText(\"x\");");
+            Assert.That(diags, Has.Some.Matches<Diagnostic>(d => d.Id == "CSK1001"));
+        }
     }
 }

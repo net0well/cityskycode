@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Text;
 using CitySky.Contracts;
@@ -54,6 +55,14 @@ namespace CitySky.Infrastructure
                 });
 
             return reply.Payload ?? new RunResult { RunId = runId, Success = false, Error = "Sem resposta do Code Host." };
+        }
+
+        /// <summary>Diagnósticos ao digitar (sublinhados): compila sem executar. F1-93.</summary>
+        public IReadOnlyList<Diagnostic> GetDiagnostics(string source)
+        {
+            Envelope<Diagnostics> reply = Exchange<GetDiagnostics, Diagnostics>(MessageType.GetDiagnostics,
+                new GetDiagnostics { Source = source ?? string.Empty });
+            return reply.Payload?.Items ?? Array.Empty<Diagnostic>();
         }
 
         private Envelope<TReply> Exchange<TRequest, TReply>(string type, TRequest payload)

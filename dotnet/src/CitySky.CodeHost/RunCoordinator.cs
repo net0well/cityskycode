@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CitySky.CodeAnalysis;
 using CitySky.Contracts;
 using CitySky.Runtime;
@@ -21,6 +22,9 @@ public sealed class RunCoordinator
         _pipeline = pipeline;
         _pool = pool;
     }
+
+    /// <summary>Diagnósticos ao digitar (compila sem executar). F1-93.</summary>
+    public IReadOnlyList<Diagnostic> Diagnose(string source) => _pipeline.Diagnose(source);
 
     public RunOutcome Run(string source, Budgets budgets)
     {

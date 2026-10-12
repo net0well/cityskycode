@@ -80,6 +80,15 @@ public sealed class CodeHostServer
                     Payload = Execute(run),
                 });
 
+            case MessageType.GetDiagnostics:
+                GetDiagnostics diagRequest = ProtocolSerializer.ReadPayload<GetDiagnostics>(payload) ?? new GetDiagnostics();
+                return ProtocolSerializer.Serialize(new Envelope<Diagnostics>
+                {
+                    Id = id,
+                    Type = MessageType.Diagnostics,
+                    Payload = new Diagnostics { Items = _coordinator.Diagnose(diagRequest.Source) },
+                });
+
             case MessageType.Cancel:
                 return null; // v0: sem fila concorrente; nada a cancelar
 
