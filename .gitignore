@@ -23,6 +23,10 @@ unity/**/sysinfo.txt
 unity/**/crashlytics-build.properties
 # Bundle do Monaco gerado a partir de editor-web/
 unity/**/StreamingAssets/editor-web/
+# Logs e resultados de teste do projeto Unity (na raiz do projeto)
+unity/**/*.log
+unity/**/*-results.xml
+unity/**/TestResults/
 
 # ---------- .NET (dotnet/ e spikes/) ----------
 [Bb]in/
