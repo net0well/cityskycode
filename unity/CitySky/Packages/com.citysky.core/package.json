@@ -1,0 +1,10 @@
+{
+  "name": "com.citysky.core",
+  "version": "0.1.0",
+  "displayName": "CitySky Core",
+  "description": "Fonte compartilhada (sem UnityEngine): Domain, Application, Contracts e Education. O mesmo código compila na Unity (Mono/IL2CPP) e no .NET 10. Ver docs/ARCHITECTURE.md §4.3.",
+  "unity": "6000.6",
+  "author": {
+    "name": "CitySkyCode"
+  }
+}
