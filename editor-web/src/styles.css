@@ -1,0 +1,101 @@
+:root {
+  --bg: #0d151e;
+  --panel: #111a24;
+  --panel-2: #16212d;
+  --border: #223142;
+  --fg: #d8e2ec;
+  --muted: #8299ad;
+  --accent: #3cc2b0;
+  --ok: #6cd6a8;
+  --err: #f0707a;
+  --warn: #f2b54b;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  background: var(--panel);
+}
+
+#toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--border);
+}
+
+#toolbar .title { font-weight: 600; color: var(--accent); }
+#toolbar .tabs { flex: 1; }
+#toolbar .tab {
+  background: transparent;
+  color: var(--fg);
+  border: none;
+  border-bottom: 2px solid var(--accent);
+  padding: 4px 8px;
+  cursor: pointer;
+}
+#toolbar .actions { display: flex; gap: 6px; }
+#toolbar button {
+  background: var(--panel);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+#btn-run { color: var(--ok); font-weight: 600; }
+#toolbar button:hover { border-color: var(--accent); }
+
+#editor { min-height: 0; }
+
+#console {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  max-height: 34%;
+  overflow: auto;
+  padding: 6px 12px;
+}
+.console-header { color: var(--muted); font-size: 12px; padding: 2px 0; }
+#console-summary.ok { color: var(--ok); }
+#console-summary.fail { color: var(--err); }
+#console-lines { list-style: none; margin: 0; padding: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+#console-lines li { padding: 2px 0; white-space: pre-wrap; }
+#console-lines li.city { color: var(--fg); }
+#console-lines li.info { color: var(--muted); }
+#console-lines li.error { color: var(--err); cursor: pointer; }
+#console-lines li.warning { color: var(--warn); cursor: pointer; }
+
+#collapsed-tab {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  background: var(--panel-2);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  padding: 12px 6px;
+  cursor: pointer;
+}
+
+/* Estado minimizado: só a faixa; o host encolhe a janela-filha ao receber panelState. */
+body[data-state='minimized'] #app { display: none; }
+body[data-state='minimized'] #collapsed-tab { display: block; }
