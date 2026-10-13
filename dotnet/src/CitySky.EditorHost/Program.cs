@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using CitySky.Contracts;
 using CitySky.EditorHost;
@@ -12,6 +13,13 @@ using Photino.NET;
 // Uso: CitySky.EditorHost [--codehost <exe>] [--web <dir>]
 string codeHostExe = ArgValue("--codehost") ?? Path.Combine(AppContext.BaseDirectory, "codehost", "CitySky.CodeHost.exe");
 string webRoot = Path.GetFullPath(ArgValue("--web") ?? Path.Combine(AppContext.BaseDirectory, "editor-web"));
+
+// --unity <player.exe>: modo embutido. O host abre o jogo e reparenta a janela do editor como painel
+// lateral direito (WS_CHILD). Sem o argumento (ou fora do Windows), o editor roda em janela própria.
+string? unityExe = ArgValue("--unity");
+bool embedded = unityExe is not null && OperatingSystem.IsWindows();
+EmbeddedEditorPanel? panel = null;
+int embeddingStarted = 0;
 
 var json = new JsonSerializerSettings
 {
@@ -44,11 +52,31 @@ void OnMessage(string raw)
 
     string type = message.Value<string>("type") ?? string.Empty;
 
-    // O painel pede estados de janela (expandir/normal). Na janela standalone isso maximiza o SO.
+    // A página carregou. No modo embutido, é a hora de abrir o jogo e encaixar o editor (uma vez só).
+    if (type == "ready")
+    {
+        if (embedded && Interlocked.Exchange(ref embeddingStarted, 1) == 0)
+        {
+            StartEmbedding();
+        }
+
+        return;
+    }
+
+    // O painel pede estados (normal/expandido/minimizado). Embutido: muda a largura do painel-filho.
+    // Standalone: maximiza/restaura a janela do SO.
     if (type == "panelState")
     {
         string state = message.Value<string>("state") ?? "normal";
-        window.Invoke(() => window.SetMaximized(state == "expanded"));
+        if (panel is not null)
+        {
+            panel.SetState(state);
+        }
+        else if (!embedded)
+        {
+            window.Invoke(() => window.SetMaximized(state == "expanded"));
+        }
+
         return;
     }
 
@@ -66,6 +94,25 @@ void OnMessage(string raw)
         if (reply is not null)
         {
             window.Invoke(() => window.SendWebMessage(reply));
+        }
+    });
+}
+
+void StartEmbedding()
+{
+    // Abrir o jogo e esperar a janela bloqueia; roda fora do thread de UI do Photino.
+    _ = Task.Run(() =>
+    {
+        try
+        {
+            var game = UnityGameWindow.Start(unityExe!, TimeSpan.FromSeconds(30));
+            var created = new EmbeddedEditorPanel(window, game, () => window.Invoke(() => window.Close()));
+            created.Attach();
+            panel = created;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine("Não consegui embutir o editor no jogo (seguindo em janela própria): " + ex.Message);
         }
     });
 }

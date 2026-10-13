@@ -100,22 +100,25 @@ html, body {
 #console-lines li.error { color: var(--err); cursor: pointer; }
 #console-lines li.warning { color: var(--warn); cursor: pointer; }
 
+/* Faixa colapsada: preenche TODA a janela-filha de 44px (sólida, sem borda nem cantos), pra não
+   deixar a cena do jogo aparecer em volta. Centraliza o rótulo { } na vertical. */
 #collapsed-tab {
   display: none;
   position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+  inset: 0;
+  align-items: center;
+  justify-content: center;
   writing-mode: vertical-rl;
   background: var(--panel-2);
   color: var(--accent);
-  border: 1px solid var(--border);
-  border-right: none;
-  border-radius: 8px 0 0 8px;
-  padding: 12px 6px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  letter-spacing: 2px;
   cursor: pointer;
 }
 
 /* Estado minimizado: só a faixa; o host encolhe a janela-filha ao receber panelState. */
 body[data-state='minimized'] #app { display: none; }
-body[data-state='minimized'] #collapsed-tab { display: block; }
+body[data-state='minimized'] #collapsed-tab { display: flex; }
