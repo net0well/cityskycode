@@ -11,7 +11,7 @@ namespace CitySky.Infrastructure
     /// pipe <b>síncrono</b> (PipeOptions.None — o assíncrono quebra no IL2CPP, spike S1b), faz o handshake
     /// Hello e envia CompileAndRun. No produto fica atrás de IIpcTransport + reinício com backoff.
     /// </summary>
-    public sealed class CodeHostClient : IDisposable
+    public sealed class CodeHostClient : ICodeHost, IDisposable
     {
         private NativeProcess _host;
         private NamedPipeClientStream _pipe;
