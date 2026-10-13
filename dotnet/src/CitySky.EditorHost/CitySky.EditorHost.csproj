@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Host do editor (PhotinoX/WebView2): hospeda o bundle Monaco (editor-web) e fala com o Code Host
+       por named pipe. v0 roda em janela própria (demo do laço editar→executar→console); embutir no
+       painel do jogo (WebView2-filho, S2a) é o passo visual seguinte. C# 14. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.EditorHost</RootNamespace>
+    <AssemblyName>CitySky.EditorHost</AssemblyName>
+    <NoWarn>$(NoWarn);CA1848;CA1873;SYSLIB1054</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PhotinoX" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <ProjectReference Include="..\CitySky.Contracts\CitySky.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

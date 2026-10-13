@@ -22,6 +22,9 @@
 
     <!-- Serialização do protocolo (mesma lib do lado Unity: com.unity.nuget.newtonsoft-json) -->
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Host do editor (WebView2 via PhotinoX, mesma do spike S2b) -->
+    <PackageVersion Include="PhotinoX" Version="5.3.5" />
   </ItemGroup>
 
 </Project>

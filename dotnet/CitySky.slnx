@@ -7,6 +7,7 @@
     <Project Path="src/CitySky.PlayerApi/CitySky.PlayerApi.csproj" />
     <Project Path="src/CitySky.CodeAnalysis/CitySky.CodeAnalysis.csproj" />
     <Project Path="src/CitySky.CodeHost/CitySky.CodeHost.csproj" />
+    <Project Path="src/CitySky.EditorHost/CitySky.EditorHost.csproj" />
     <Project Path="src/CitySky.Sandbox.Runtime/CitySky.Sandbox.Runtime.csproj" />
     <Project Path="src/CitySky.Sandbox.Worker/CitySky.Sandbox.Worker.csproj" />
   </Folder>

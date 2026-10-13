@@ -11,16 +11,24 @@ import EditorWorker from 'monaco-editor/editor/editor.worker?worker&inline';
 // ---------------------------------------------------------------------------------------------
 type Message = { type: string; [key: string]: unknown };
 
+// O host pode ser PhotinoX (window.external) ou WebView2 cru (window.chrome.webview). Suporta os dois.
+interface Photino {
+  sendMessage(message: string): void;
+  receiveMessage(callback: (message: string) => void): void;
+}
 interface WebView2 {
   postMessage(message: string): void;
   addEventListener(type: 'message', handler: (event: { data: string }) => void): void;
 }
 
+const photino = (window as unknown as { external?: Photino }).external;
 const webview = (window as unknown as { chrome?: { webview?: WebView2 } }).chrome?.webview;
 
 function send(message: Message): void {
   const json = JSON.stringify(message);
-  if (webview) {
+  if (photino?.sendMessage) {
+    photino.sendMessage(json);
+  } else if (webview) {
     webview.postMessage(json);
   } else {
     console.log('[editor→host]', json); // modo dev (navegador, sem host)
@@ -28,13 +36,18 @@ function send(message: Message): void {
 }
 
 function onHostMessage(handler: (message: Message) => void): void {
-  webview?.addEventListener('message', (event) => {
+  const dispatch = (raw: string): void => {
     try {
-      handler(JSON.parse(event.data) as Message);
+      handler(JSON.parse(raw) as Message);
     } catch (error) {
       console.error('mensagem inválida do host', error);
     }
-  });
+  };
+  if (photino?.receiveMessage) {
+    photino.receiveMessage(dispatch);
+  } else {
+    webview?.addEventListener('message', (event) => dispatch(event.data));
+  }
 }
 
 // ---------------------------------------------------------------------------------------------
