@@ -43,6 +43,15 @@ void OnMessage(string raw)
     catch (JsonException) { return; }
 
     string type = message.Value<string>("type") ?? string.Empty;
+
+    // O painel pede estados de janela (expandir/normal). Na janela standalone isso maximiza o SO.
+    if (type == "panelState")
+    {
+        string state = message.Value<string>("state") ?? "normal";
+        window.Invoke(() => window.SetMaximized(state == "expanded"));
+        return;
+    }
+
     string source = message.Value<string>("source") ?? string.Empty;
 
     // Chamadas ao Code Host bloqueiam (round-trip do pipe); rodam fora do thread de UI.

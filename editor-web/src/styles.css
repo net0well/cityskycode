@@ -25,10 +25,19 @@ html, body {
 
 #app {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto var(--console-h, 220px);
   height: 100vh;
   background: var(--panel);
 }
+
+/* Divisor arrastável entre o editor e o console (redimensiona a área de baixo). */
+#splitter {
+  height: 6px;
+  cursor: row-resize;
+  background: var(--border);
+  transition: background 0.1s;
+}
+#splitter:hover, #splitter.dragging { background: var(--accent); }
 
 #toolbar {
   display: flex;
@@ -61,15 +70,26 @@ html, body {
 #btn-run { color: var(--ok); font-weight: 600; }
 #toolbar button:hover { border-color: var(--accent); }
 
-#editor { min-height: 0; }
+#editor { min-height: 0; min-width: 0; position: relative; overflow: hidden; }
 
 #console {
   background: var(--bg);
-  border-top: 1px solid var(--border);
-  max-height: 34%;
   overflow: auto;
   padding: 6px 12px;
+  min-height: 0;
 }
+
+/* Scrollbars no tema escuro (o WebView2/Chromium mostra as setas brancas do Windows por padrão). */
+#console::-webkit-scrollbar { width: 12px; height: 12px; }
+#console::-webkit-scrollbar-track { background: var(--bg); }
+#console::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 3px solid var(--bg);
+  border-radius: 8px;
+}
+#console::-webkit-scrollbar-thumb:hover { background: #2f445a; }
+#console::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+#console::-webkit-scrollbar-corner { background: var(--bg); }
 .console-header { color: var(--muted); font-size: 12px; padding: 2px 0; }
 #console-summary.ok { color: var(--ok); }
 #console-summary.fail { color: var(--err); }

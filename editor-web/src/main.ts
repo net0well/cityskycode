@@ -5,6 +5,7 @@ import './styles.css';
 import * as monaco from 'monaco-editor/editor/editor.api';
 import 'monaco-editor/languages/definitions/csharp/register';
 import EditorWorker from 'monaco-editor/editor/editor.worker?worker&inline';
+import { registerPlayerApiCompletions } from './playerApiCompletions';
 
 // ---------------------------------------------------------------------------------------------
 // Ponte com o host (Unity via WebView2): mensagens JSON {type, ...}. F1-74/F1-90.
@@ -55,6 +56,8 @@ function onHostMessage(handler: (message: Message) => void): void {
 // ---------------------------------------------------------------------------------------------
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
 
+registerPlayerApiCompletions();
+
 monaco.editor.defineTheme('citysky-dusk', {
   base: 'vs-dark',
   inherit: true,
@@ -91,6 +94,19 @@ const editor = monaco.editor.create(document.getElementById('editor')!, {
   minimap: { enabled: false },
   scrollBeyondLastLine: false,
 });
+
+// A JetBrains Mono carrega de forma assíncrona (fontsource). O Monaco mede a largura dos glifos
+// no momento da criação — antes da fonte chegar — e isso faz o cursor/seleção pararem antes do
+// fim da linha. Ao terminar o carregamento, remedimos os glifos e refazemos o layout.
+function relayout(): void {
+  monaco.editor.remeasureFonts();
+  editor.layout();
+}
+if (document.fonts?.ready) {
+  void document.fonts.ready.then(relayout);
+}
+window.addEventListener('resize', () => editor.layout());
+window.setTimeout(relayout, 300); // rede de segurança caso fonts.ready não dispare
 
 // ---------------------------------------------------------------------------------------------
 // Console
@@ -150,12 +166,47 @@ function applyDiagnostics(items: Diagnostic[]): void {
 // Executar
 // ---------------------------------------------------------------------------------------------
 function run(): void {
+  consoleLines.replaceChildren(); // começa limpo: sem resíduo da execução anterior
   setSummary('Executando…', '');
   send({ type: 'run', source: model.getValue() });
 }
 
 document.getElementById('btn-run')!.addEventListener('click', run);
 editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, run);
+
+// ---------------------------------------------------------------------------------------------
+// Divisor: arrastar pra redimensionar o console (a altura vive na var CSS --console-h do #app)
+// ---------------------------------------------------------------------------------------------
+const app = document.getElementById('app')!;
+const splitter = document.getElementById('splitter')!;
+let dragging = false;
+
+splitter.addEventListener('pointerdown', (e) => {
+  dragging = true;
+  splitter.classList.add('dragging');
+  splitter.setPointerCapture(e.pointerId);
+});
+splitter.addEventListener('pointermove', (e) => {
+  if (!dragging) {
+    return;
+  }
+  const rect = app.getBoundingClientRect();
+  // Distância do cursor até a base = altura desejada do console; limita pra editor e console respirarem.
+  const height = Math.min(Math.max(rect.bottom - e.clientY, 72), rect.height - 160);
+  app.style.setProperty('--console-h', `${height}px`);
+  editor.layout();
+});
+const endDrag = (e: PointerEvent): void => {
+  if (!dragging) {
+    return;
+  }
+  dragging = false;
+  splitter.classList.remove('dragging');
+  splitter.releasePointerCapture(e.pointerId);
+  editor.layout();
+};
+splitter.addEventListener('pointerup', endDrag);
+splitter.addEventListener('pointercancel', endDrag);
 
 // ---------------------------------------------------------------------------------------------
 // Estados do painel (o host redimensiona a janela-filha ao receber panelState)
