@@ -38,8 +38,7 @@ public sealed class PipeHostService : BackgroundService
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            using var pipe = new NamedPipeServerStream(
-                pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+            using var pipe = PipeServerFactory.CreateSessionServer(pipeName);
             try
             {
                 await pipe.WaitForConnectionAsync(stoppingToken).ConfigureAwait(false);

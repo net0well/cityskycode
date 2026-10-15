@@ -45,7 +45,7 @@ public static class IlVerifier
 
         if (reader.GetTableRowCount(TableIndex.ModuleRef) > 0)
         {
-            findings.Add(new Finding("CSK1004", "Referência a módulo externo (P/Invoke) não é permitida.", 0));
+            findings.Add(new Finding(DiagnosticMessages.LowLevel, DiagnosticMessages.PInvokeModule, 0));
         }
 
         foreach (MethodDefinitionHandle handle in reader.MethodDefinitions)
@@ -53,7 +53,7 @@ public static class IlVerifier
             MethodDefinition method = reader.GetMethodDefinition(handle);
             if ((method.Attributes & MethodAttributes.PinvokeImpl) != 0)
             {
-                findings.Add(new Finding("CSK1004", "Método com P/Invoke não é permitido.", 0));
+                findings.Add(new Finding(DiagnosticMessages.LowLevel, DiagnosticMessages.PInvokeMethod, 0));
             }
         }
 
@@ -63,7 +63,7 @@ public static class IlVerifier
             string name = FullName(reader, type);
             if (!IsTypeAllowedAtIl(name))
             {
-                findings.Add(new Finding("CSK1001", $"IL referencia o tipo proibido '{name}'.", 0));
+                findings.Add(new Finding(DiagnosticMessages.Unavailable, DiagnosticMessages.IlBannedType(name), 0));
             }
         }
 
@@ -82,7 +82,7 @@ public static class IlVerifier
                 && !Allowlist.IsMemberAllowed(typeName, memberName)
                 && !IsTypeAllowedAtIl(typeName))
             {
-                findings.Add(new Finding("CSK1001", $"IL chama '{typeName}.{memberName}', que não está disponível.", 0));
+                findings.Add(new Finding(DiagnosticMessages.Unavailable, DiagnosticMessages.IlBannedCall(typeName, memberName), 0));
             }
         }
 

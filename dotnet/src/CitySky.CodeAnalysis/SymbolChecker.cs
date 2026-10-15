@@ -36,17 +36,17 @@ public sealed class SymbolChecker
                 case PointerTypeSyntax:
                 case FunctionPointerTypeSyntax:
                 case StackAllocArrayCreationExpressionSyntax:
-                    Report("CSK1004", "Recurso de baixo nível não está disponível na cidade.", node);
+                    Report(DiagnosticMessages.LowLevel, DiagnosticMessages.LowLevelFeature, node);
                     break;
                 case DestructorDeclarationSyntax:
-                    Report("CSK1002", "Finalizadores não estão disponíveis na cidade.", node);
+                    Report(DiagnosticMessages.NoFinalizers, DiagnosticMessages.Finalizers, node);
                     break;
                 case LocalFunctionStatementSyntax { Modifiers: var m } when m.Any(SyntaxKind.ExternKeyword):
                 case MethodDeclarationSyntax { Modifiers: var mm } when mm.Any(SyntaxKind.ExternKeyword):
-                    Report("CSK1004", "Métodos externos não estão disponíveis na cidade.", node);
+                    Report(DiagnosticMessages.LowLevel, DiagnosticMessages.ExternMethods, node);
                     break;
                 case AttributeSyntax attr when IsBannedAttribute(attr):
-                    Report("CSK1003", "Este atributo não está disponível na cidade.", node);
+                    Report(DiagnosticMessages.BannedAttribute, DiagnosticMessages.AttributeNotAvailable, node);
                     break;
             }
         }
@@ -110,7 +110,7 @@ public sealed class SymbolChecker
         string typeName = Canonical(containingType);
         if (!Allowlist.IsMemberAllowed(typeName, memberName))
         {
-            Report("CSK1001", $"'{typeName}.{memberName}' não está disponível na cidade.", node);
+            Report(DiagnosticMessages.Unavailable, DiagnosticMessages.MemberUnavailable(typeName, memberName), node);
         }
     }
 
@@ -124,7 +124,7 @@ public sealed class SymbolChecker
         string name = Canonical(type);
         if (!Allowlist.IsTypeAllowed(name))
         {
-            Report("CSK1001", $"O tipo '{name}' não está disponível na cidade.", node);
+            Report(DiagnosticMessages.Unavailable, DiagnosticMessages.TypeUnavailable(name), node);
         }
     }
 

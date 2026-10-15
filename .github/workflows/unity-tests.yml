@@ -1,0 +1,52 @@
+name: unity-tests
+
+# F1-07: testes da Unity (EditMode + PlayMode) via GameCI em PRs que tocam unity/**.
+# Requer, nos Secrets do repositório, a licença Personal da Unity (criada pelo dono):
+#   UNITY_LICENSE  (conteúdo do .ulf — fluxo de ativação do GameCI)
+#   UNITY_EMAIL, UNITY_PASSWORD
+# Sem esses secrets o job falha na ativação — é esperado até o dono configurá-los.
+on:
+  pull_request:
+    paths:
+      - 'unity/**'
+      - '.github/workflows/unity-tests.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'unity/**'
+      - '.github/workflows/unity-tests.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      # Cache da Library para acelerar as execuções seguintes.
+      - uses: actions/cache@v4
+        with:
+          path: unity/CitySky/Library
+          key: Library-${{ hashFiles('unity/CitySky/Assets/**', 'unity/CitySky/Packages/**', 'unity/CitySky/ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      - name: Testes da Unity (EditMode + PlayMode)
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: unity/CitySky
+          unityVersion: 6000.6.5f1
+          testMode: all
+          artifactsPath: unity-test-results
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unity-test-results
+          path: unity-test-results
