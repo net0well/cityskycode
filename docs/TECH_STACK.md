@@ -234,9 +234,16 @@ dotnet tool install -g CWM.RoslynNavigator
 | Unity | 6.7 LTS (`6000.7.x`) | `ProjectSettings/ProjectVersion.txt` |
 | URP | o da versão da Unity (17.x) | `Packages/manifest.json` |
 | Entities / Collections / Mathematics / Entities Graphics | *core packages* da versão Unity | embutidos no editor (6.4+) |
-| .NET SDK | 10.0.x (última *patch*) | `dotnet/global.json` |
-| Microsoft.CodeAnalysis.* | 5.x | `dotnet/Directory.Packages.props` (Central Package Management) |
-| NUnit | 4.x (.NET) / UTF (Unity) | CPM / `manifest.json` |
+| .NET SDK | **10.0.400** (rollForward latestFeature) | `dotnet/global.json` ✅ |
+| Microsoft.CodeAnalysis.CSharp(.Features/.Workspaces) | **5.9.0** | `dotnet/Directory.Packages.props` (CPM) ✅ |
+| NUnit | **4.6.1** (.NET) / UTF (Unity) | CPM ✅ / `manifest.json` |
+| NUnit3TestAdapter | **6.3.1** | CPM ✅ |
+| Microsoft.NET.Test.Sdk | **18.10.1** | CPM ✅ |
+| Newtonsoft.Json | **13.0.3** (mesma lib do lado Unity) | CPM ✅ |
+| Microsoft.Extensions.Hosting | **10.0.0** | CPM ✅ |
+| Unity | **6000.6.5f1** (instalada; alvo 6.7 LTS quando sair) | `ProjectSettings/ProjectVersion.txt` |
+| URP | **17.6.0** (embutido na Unity) | `Packages/manifest.json` |
 | Monaco | última estável | `editor-web/package-lock.json` |
 
 > **Regra do dotnet-claude-kit (`packages`):** sempre usar a última versão **estável** verificada no NuGet, nunca uma versão "de memória". Exceção: pacotes consumidos pela Unity seguem a compatibilidade com `netstandard2.1`.
+> **Fixado na Fase 1 (2026-10-12):** as versões marcadas ✅ estão em `dotnet/global.json` e `dotnet/Directory.Packages.props` (CPM). A fonte compartilhada (`com.citysky.core`, `netstandard2.1`, C# 9) tem **zero dependências externas** (O6).

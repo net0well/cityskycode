@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Allowlist, analyzers pedagógicos e verificador de IL (Roslyn). C# 14.
+       Referencia PlayerApi e Sandbox.Runtime para que seus .dll fiquem no output (o ReferenceSet
+       os adiciona às referências da compilação do jogador e o Worker os carrega). -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.CodeAnalysis</RootNamespace>
+    <AssemblyName>CitySky.CodeAnalysis</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <ProjectReference Include="..\CitySky.Contracts\CitySky.Contracts.csproj" />
+    <ProjectReference Include="..\CitySky.PlayerApi\CitySky.PlayerApi.csproj" />
+    <ProjectReference Include="..\CitySky.Sandbox.Runtime\CitySky.Sandbox.Runtime.csproj" />
+  </ItemGroup>
+
+</Project>

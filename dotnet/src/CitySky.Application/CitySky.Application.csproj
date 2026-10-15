@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Linka Runtime/Application do pacote Unity. Referencia só o Domain (ARCHITECTURE §4.1/4.2). -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <RootNamespace>CitySky.Application</RootNamespace>
+    <AssemblyName>CitySky.Application</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\unity\CitySky\Packages\com.citysky.core\Runtime\Application\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CitySky.Domain\CitySky.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

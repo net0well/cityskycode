@@ -2,6 +2,7 @@
 
 > **Status:** v0.1 (MVP) · **Data:** 2026-10-08 · **ADRs:** 0005, 0014 · **MVP:** sim
 > Projeto: `dotnet/src/CitySky.PlayerApi` (.NET 10). Superfície pública revisada com `get_public_api` (Roslyn MCP) em todo PR.
+> **Implementado na Fase 1 (v0, 2026-10-12):** só o mínimo do esqueleto — `CityGame.Current`, `City.Log(string)`, `City.Log(object)` e a ponte `ICityGateway`/`LiveCityGateway` (padrão Gateway/Adapter), com XML docs pt-BR (`CS1591` como erro). O resto desta API (prédios, consultas, economia) entra nas fases seguintes.
 
 ---
 

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- API pública do jogador (XML docs pt-BR). C# 14. v0: só registro no console (F1-80);
+       o gateway cresce para comandos/read models em fases seguintes. CS1591 vira erro (TWAE). -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky</RootNamespace>
+    <AssemblyName>CitySky.PlayerApi</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+</Project>

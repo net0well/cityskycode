@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Fonte única do domínio: o código vive no pacote Unity e é linkado aqui (ARCHITECTURE §4.3).
+       netstandard2.1 + C# 9 para compilar igual na Unity (Mono/IL2CPP) e no .NET 10. Zero deps (O6). -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <RootNamespace>CitySky.Domain</RootNamespace>
+    <AssemblyName>CitySky.Domain</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\unity\CitySky\Packages\com.citysky.core\Runtime\Domain\**\*.cs" />
+  </ItemGroup>
+
+</Project>

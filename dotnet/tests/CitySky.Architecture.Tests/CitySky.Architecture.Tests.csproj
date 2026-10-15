@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.Architecture.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CitySky.Domain\CitySky.Domain.csproj" />
+    <ProjectReference Include="..\..\src\CitySky.Application\CitySky.Application.csproj" />
+    <ProjectReference Include="..\..\src\CitySky.Contracts\CitySky.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\CitySky.Education\CitySky.Education.csproj" />
+  </ItemGroup>
+
+</Project>

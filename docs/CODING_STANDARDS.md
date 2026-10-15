@@ -13,7 +13,8 @@
 
 ## 2. Regras comuns (U e N)
 - **Nomes:** PascalCase para tipos e membros públicos; `_camelCase` para campos privados; `camelCase` para locais e parâmetros; interfaces com `I`; nomes descritivos em **inglês** (ADR-0014). Comentários e XML docs em **pt-BR** quando voltados ao jogador (Player API), e em inglês ou pt-BR no código interno (consistência por arquivo).
-- **Um tipo por arquivo**, nome do arquivo = nome do tipo.
+- **Um tipo por arquivo**, nome do arquivo = nome do tipo, **organizados em pastas por área**. Nunca vários tipos (classe/record/struct/enum/interface) no mesmo arquivo — inclusive DTOs e enums pequenos. (Exceção: tipos *private nested* de implementação, que ficam com o dono.) O dono do produto preza muito essa organização.
+- **Aplicar padrões de projeto** reconhecidos onde agregam valor, nomeando-os (Strategy, Factory, Adapter/Gateway, Command, Observer, Object Pool, etc.). **Sem sobre-engenharia:** não introduzir padrão sem justificativa (regra inviolável do `CLAUDE.md`).
 - **`sealed` por padrão** (exceto tipos-base da Player API desenhados para herança).
 - **Imutabilidade** por padrão: `readonly` em campos, structs `readonly`, coleções expostas como `IReadOnlyList<T>`.
 - **Nullable reference types habilitados** (Perfil U via `csc.rsp` `-nullable:enable`; Perfil N via `Directory.Build.props`).

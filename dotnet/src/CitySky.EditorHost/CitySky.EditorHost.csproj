@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Host do editor (PhotinoX/WebView2): hospeda o bundle Monaco (editor-web) e fala com o Code Host
+       por named pipe. Roda em janela própria (demo do laço editar→executar→console) OU embutido como
+       painel-filho da janela do jogo (WebView2-filho reparentado, técnica validada no spike S2a) quando
+       recebe o argumento unity com o caminho do player. C# 14. CA1416 suprimido: o modo embutido é
+       Windows-only por projeto (ADR-0018, Windows primeiro); o código é marcado
+       [SupportedOSPlatform("windows")] e guardado por OperatingSystem.IsWindows() em runtime. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>CitySky.EditorHost</RootNamespace>
+    <AssemblyName>CitySky.EditorHost</AssemblyName>
+    <NoWarn>$(NoWarn);CA1848;CA1873;SYSLIB1054;CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PhotinoX" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <ProjectReference Include="..\CitySky.Contracts\CitySky.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -122,8 +122,11 @@ city.Policies.Garbage.Use(new NearestDepotRouting());
 - Arquivos com métodos `[Test]` (API NUnit: `Assert.That`, `Is.EqualTo`), descobertos por reflexão **dentro do Worker** (o runner do NUnit não é usado). Ver `TESTING.md` §B.
 
 ## 6. Protocolo Unity ↔ Code Host (`CitySky.Contracts`)
-- Transporte: **named pipe** com nome aleatório por sessão e ACL do usuário atual. Fallback: **TCP loopback** em porta efêmera + token de 256 bits no handshake (decisão final no spike S1, por causa do IL2CPP).
+- Transporte: **named pipe** com nome aleatório por sessão e ACL do usuário atual (padrão, confirmado no S1b pela segurança — sem superfície de rede). Fallback: **TCP loopback** em porta efêmera + token de 256 bits no handshake (habilitar só se o pipe gerenciado falhar numa máquina).
+- **Lançamento do Host/Worker: `CreateProcess` nativo (P/Invoke), nunca `System.Diagnostics.Process`.** O S1b mostrou que `Process.Start` **falha no player IL2CPP** nos dois modos (`UseShellExecute` false e true; exceção só diz "Success"). O lançamento nativo (mesmo caminho do `ISandboxLauncher`/S6) funciona. `IIpcTransport`/`ISandboxLauncher` nascem nativos na Fase 1.
+- **Pipes síncronos** no lado da Unity (`PipeOptions.None`): o IL2CPP quebra o *callback* de I/O assíncrono (`ThreadPoolBoundHandle::OnNativeIOCompleted`). Usar thread de I/O dedicada + fila para o main thread.
 - Enquadramento: `[uint32 length][json]`, limite de 8 MB por mensagem.
+- **Latência medida (S1b, player IL2CPP, win-x64):** ida-e-volta de 64 B ~1,4 ms (pipe) / ~0,1 ms (TCP); 8 MB ~15 ms; morte do Host detectada em ~3 ms; reinício+reconexão ~120 ms. O pipe no IL2CPP é mais lento que o TCP, então o protocolo **agrupa uma ida-e-volta por tick** (comandos em lote + *read models* em delta), não uma por comando. Pendências do S1b: validar Newtonsoft com `link.xml` (F1-13), ACL explícita do pipe e token do TCP (F1).
 - Envelope:
 ```json
 { "v": 1, "id": "c3f1…", "type": "CompileAndRun", "payload": { … } }
@@ -149,6 +152,8 @@ city.Policies.Garbage.Use(new NearestDepotRouting());
 
 - **Versionamento:** `protocolVersion` inteiro. Unity e Host são distribuídos juntos, mas o handshake rejeita versões diferentes com mensagem clara.
 - **Testes de contrato:** golden files JSON em `dotnet/tests/CitySky.Contracts.Tests` (desserializar → serializar → comparar).
+
+> **Implementado na Fase 1 (v0, 2026-10-12):** `CitySky.Contracts` tem o `Protocol` (versão, limite 8 MB), `MessageFraming` (`[uint32 len][bytes]`) e as mensagens `Hello/CompileAndRun/RunResult/Diagnostics/Cancel` (classes imutáveis C# 9) com golden JSON. O pipeline `Parse→L1→reescrita→compilação→emissão→L2` está em `CitySky.CodeAnalysis`; a execução isolada (ALC coletável + orçamentos) em `CitySky.Sandbox.Runtime`/`CitySky.Sandbox.Worker`; o Code Host (Generic Host + named pipe + `WorkerPool` com 1 worker quente) em `CitySky.CodeHost`. **Lançamento do Worker: `Process` com stdio redirecionado (v0); o Job Object (F1-51) e a ACL explícita do pipe (F1-50) ficam para a sequência da Fase 1.** Corpus de segurança em `CitySky.Security.Tests`.
 
 ## 7. Orçamentos padrão
 | Recurso | Script | Laboratório | Comportamento (por lote) |
