@@ -1,16 +1,23 @@
 # Fase 1 — Fundação (walking skeleton)
 
-> **Status:** Em andamento (lado .NET) · **Bloco:** A · **Atualizado:** 2026-10-12
+> **Status:** Quase fechada · **Bloco:** A · **Atualizado:** 2026-10-15
 >
-> **Progresso (2026-10-12), 68 testes verdes em `dotnet/CitySky.slnx`:**
-> - ✅ **E1** (F1-01..04): `.editorconfig`, `global.json`, `Directory.Build.props`, CPM, `CitySky.slnx`.
-> - ✅ **E3** (F1-20..22): fonte compartilhada (Domain/Application/Contracts/Education, netstandard2.1 C# 9) + shim `IsExternalInit` + testes de arquitetura.
-> - ✅ **E4** (F1-30..38): núcleo determinístico (valores, IDs, `Pcg32`, `XxHash64`, `SimulationClock`, sistemas + `Simulation.RunTick`, `CommandQueue`, `DomainEventBuffer`, `HeadlessSimulation`).
-> - ✅ **E7** (F1-60..61): Contracts v1 (framing + mensagens + golden JSON).
-> - ⚠️ **E8** parcial: ✅ F1-71 (pipeline L1/rewrite/L2), F1-72 (execução no Worker em processo), F1-73 (pool), F1-75 (corpus de segurança), F1-70 (Code Host Generic Host + named pipe), F1-80 (Player API v0). Falta **F1-51** (Job Object), **F1-50** (ACL do pipe), **F1-74** (Unity inicia o Host).
-> - ⏳ **Falta:** E2 (projeto Unity F1-10..13), E5 (runner/CommandBus/composition root), E6 restante (IIpcTransport/ICodeEditorHost/IPlatformServices/IFileLocations), E9 revisão, E10 (editor+console), E11 (localização+save/load), E12 (determinismo no lado Unity), workflows de CI (F1-05..07).
+> **Progresso (2026-10-15), 97 testes verdes em `dotnet/CitySky.slnx` + 14 EditMode na Unity:**
+> - ✅ **E1** (F1-01..06,08): configs, CPM, `.slnx`, CI `dotnet-windows`/`dotnet-linux` + template de PR. (F1-07 escrito — ver abaixo.)
+> - ✅ **E2** (F1-10..13): projeto Unity, pacote `com.citysky.core` (4 asmdefs `noEngineReferences`), asmdefs de `Assets/Code`. **URP+IL2CPP player: pendente** (hoje há player Mono + pipeline Built-in de demonstração; ver F1-10 abaixo).
+> - ✅ **E3** (F1-20..22): fonte compartilhada + shim `IsExternalInit` + testes de arquitetura.
+> - ✅ **E4** (F1-30..38): núcleo determinístico completo.
+> - ✅ **E5** (F1-40..43): runner, `CommandBus`, read model, composition root (Pure DI).
+> - ✅ **E6** (F1-50..53): **F1-50 ACL do pipe** (só usuário atual + SYSTEM no Windows), **F1-51** Job Object, **F1-52** editor embutido (WebView2-filho, painel direito), **F1-53** `IFileLocations`/`IPlatformServices` + implementações Standalone.
+> - ✅ **E7** (F1-60..61): Contracts v1.
+> - ✅ **E8** (F1-70..75): pipeline L1/L2/L3, Worker, pool, Code Host, Unity inicia o Host, corpus de segurança.
+> - ✅ **E9** (F1-80..81): Player API v0 + **revisão F1-81** (`docs/reviews/F1-81-player-api-review.md`).
+> - ✅ **E10** (F1-90..93): editor-web Monaco, painel (3 estados), broker/debounce, diagnósticos ao digitar; autocompletar curado da Player API.
+> - ⚠️ **E11**: ✅ **F1-101 save/load** (snapshot + JSON canônico + gzip + escrita atômica com `.bak`; round-trip com hash igual nos dois runtimes). **F1-100 parcial:** mensagens pt-BR do Code Host centralizadas (`DiagnosticMessages`); tabelas de localização da UI da Unity pendentes (pouca superfície de UI até agora).
+> - ✅ **E12** (F1-110..112): determinismo .NET↔Mono, independência de velocidade, marco `city.Log` (provado ponta a ponta no editor embutido; build IL2CPP pendente).
+> - ⏳ **Falta p/ fechar o gate:** F1-10 URP+IL2CPP player, F1-91 abas UI Toolkit (Inspector/Lições — sem conteúdo até F3+/F8), F1-07 rodar no CI (precisa dos secrets de licença), demo IL2CPP do F1-112.
 >
-> **Convenção do dono (2026-10-12):** um tipo por arquivo em pastas; aplicar design patterns onde cabem (ver `CODING_STANDARDS.md` §2).
+> **Convenção do dono:** um tipo por arquivo em pastas; aplicar design patterns onde cabem (ver `CODING_STANDARDS.md` §2).
 
 > **Status original:** Planejada · **Bloco:** A · **Atualizado:** 2026-10-08
 > **Entrada:** gate da Fase 0 (S1, S2, S6, S7 resolvidos; transporte IPC, mecanismo de sandbox e host do editor decididos) · **Saída:** `city.Log("Olá")` digitado no jogo aparece no console **e** o teste de hash passa em Mono e .NET 10 · **Estimativa:** 6 semanas
