@@ -35,6 +35,14 @@ window
     .SetTitle("City: SkyCode — Editor")
     .SetUseOsDefaultSize(false)
     .SetSize(1000, 720)
+    // Chromeless + transparente: no estado minimizado o painel some e deixa a cena do jogo aparecer;
+    // no Windows, janela transparente tem que ser chromeless (regra do WebView2). As regiões opacas do
+    // editor (fundo do #app) continuam compondo por cima da cena normalmente. Chromeless no Windows
+    // exige tamanho E posição explícitos (nada de OS default location).
+    .SetUseOsDefaultLocation(false)
+    .SetLocation(new System.Drawing.Point(200, 120))
+    .SetChromeless(true)
+    .SetTransparent(true)
     .SetContextMenuEnabled(false)
     .SetUserDataFolder(Path.Combine(Path.GetTempPath(), "CitySkyEditorHost"))
     .RegisterCustomSchemeHandler("app", ServeFile)

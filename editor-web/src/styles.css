@@ -16,7 +16,9 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: var(--bg);
+  /* Transparente: no estado minimizado o #app some e a cena do jogo aparece. No estado normal o #app
+     (fundo opaco) cobre toda a janela, então o editor continua opaco por cima da cena. */
+  background: transparent;
   color: var(--fg);
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
@@ -100,25 +102,31 @@ html, body {
 #console-lines li.error { color: var(--err); cursor: pointer; }
 #console-lines li.warning { color: var(--warn); cursor: pointer; }
 
-/* Faixa colapsada: preenche TODA a janela-filha de 44px (sólida, sem borda nem cantos), pra não
-   deixar a cena do jogo aparecer em volta. Centraliza o rótulo { } na vertical. */
+/* Faixa colapsada: transparente (deixa a cena do jogo aparecer). No hover, escurece de leve e a seta
+   "puxa" para a esquerda, convidando a abrir o painel. */
 #collapsed-tab {
   display: none;
   position: absolute;
   inset: 0;
   align-items: center;
   justify-content: center;
-  writing-mode: vertical-rl;
-  background: var(--panel-2);
+  background: transparent;
   color: var(--accent);
   border: none;
   margin: 0;
   padding: 0;
-  font-size: 15px;
-  letter-spacing: 2px;
+  font-size: 22px;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 /* Estado minimizado: só a faixa; o host encolhe a janela-filha ao receber panelState. */
 body[data-state='minimized'] #app { display: none; }
 body[data-state='minimized'] #collapsed-tab { display: flex; }
+
+#collapsed-tab:hover { background: rgba(17, 26, 36, 0.80); }
+#collapsed-tab .chevron {
+  opacity: 0.55;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+#collapsed-tab:hover .chevron { opacity: 1; transform: translateX(-5px); }

@@ -4,6 +4,13 @@ import '@fontsource/jetbrains-mono/latin-400.css';
 import './styles.css';
 import * as monaco from 'monaco-editor/editor/editor.api';
 import 'monaco-editor/languages/definitions/csharp/register';
+// Contribuições do editor (o import slim editor.api não as traz). Sem o suggestController a janela de
+// sugestões nunca aparece, mesmo com o provider registrado; snippetController2 habilita o insert com
+// placeholders; hover e parameterHints completam a ajuda ao digitar.
+import 'monaco-editor/editor/contrib/suggest/browser/suggestController';
+import 'monaco-editor/editor/contrib/snippet/browser/snippetController2';
+import 'monaco-editor/editor/contrib/hover/browser/hoverContribution';
+import 'monaco-editor/editor/contrib/parameterHints/browser/parameterHints';
 import EditorWorker from 'monaco-editor/editor/editor.worker?worker&inline';
 import { registerPlayerApiCompletions } from './playerApiCompletions';
 
@@ -93,6 +100,9 @@ const editor = monaco.editor.create(document.getElementById('editor')!, {
   fontSize: 14,
   minimap: { enabled: false },
   scrollBeyondLastLine: false,
+  // No painel estreito (embutido no jogo), os widgets flutuantes do Monaco (sugestões, hover) seriam
+  // recortados pela borda do editor; isto os ancora em posição fixa no body, fora desses limites.
+  fixedOverflowWidgets: true,
 });
 
 // A JetBrains Mono carrega de forma assíncrona (fontsource). O Monaco mede a largura dos glifos
