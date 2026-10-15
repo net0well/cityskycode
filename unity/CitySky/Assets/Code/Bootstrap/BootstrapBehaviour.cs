@@ -19,7 +19,14 @@ namespace CitySky.Bootstrap
         private void Awake()
         {
             _budget = new StopwatchSimulationBudget();
-            _root = new CompositionRoot((ulong)_worldSeed, new UnityLog());
+
+            var log = new UnityLog();
+            IPlatformServices platform = new StandalonePlatformServices();
+            IFileLocations files = new StandaloneFileLocations();
+            ISaveStore saveStore = new FileSaveStore(files);
+            log.Info("City: SkyCode — " + platform.PlatformName + " v" + platform.ApplicationVersion);
+
+            _root = new CompositionRoot((ulong)_worldSeed, log, saveStore);
             UnityEngine.Application.runInBackground = true;
         }
 

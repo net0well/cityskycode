@@ -12,10 +12,12 @@ namespace CitySky.Bootstrap
     public sealed class CompositionRoot
     {
         private readonly ILog _log;
+        private readonly ISaveStore? _saveStore;
 
-        public CompositionRoot(ulong worldSeed, ILog log)
+        public CompositionRoot(ulong worldSeed, ILog log, ISaveStore? saveStore = null)
         {
             _log = log;
+            _saveStore = saveStore;
             Simulation = new Simulation(worldSeed, HeadlessSimulation.DefaultSystems());
             Runner = new SimulationRunner(Simulation);
             CommandBus = new CommandBus(Simulation);
@@ -36,6 +38,25 @@ namespace CitySky.Bootstrap
         {
             Runner.Advance(deltaSeconds, speed, budget);
             Summary.Update(Simulation.State.Clock, speed, Runner.EffectiveSpeedLimited);
+        }
+
+        /// <summary>Retrato do estado atual para save (somente leitura). F1-101.</summary>
+        public CitySnapshot CaptureSnapshot() => SnapshotService.Capture(Simulation.State);
+
+        /// <summary>
+        /// Grava o estado atual no slot informado; retorna <c>false</c> se nenhuma store foi configurada.
+        /// Carregar um save de volta para a simulação em execução é trabalho de fase futura (precisa de um
+        /// caminho de restauração no núcleo da simulação; o round-trip de dados já está provado em testes).
+        /// </summary>
+        public bool Save(string slot)
+        {
+            if (_saveStore is null)
+            {
+                return false;
+            }
+
+            _saveStore.Save(slot, CaptureSnapshot());
+            return true;
         }
 
         private void OnDomainEvent(IDomainEvent domainEvent)

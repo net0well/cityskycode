@@ -8,22 +8,6 @@ namespace CitySky.EditModeTests
     // F1-101 no runtime da Unity (Mono): save/load round-trip com hash igual, espelhando o teste .NET.
     public sealed class SaveLoadEditModeTests
     {
-        // IFileLocations temporário e isolado (não suja o persistentDataPath).
-        private sealed class TempLocations : IFileLocations
-        {
-            public TempLocations(string root)
-            {
-                SavesDirectory = Path.Combine(root, "saves");
-                ProfilesDirectory = Path.Combine(root, "profiles");
-                LogsDirectory = Path.Combine(root, "logs");
-                Directory.CreateDirectory(SavesDirectory);
-            }
-
-            public string SavesDirectory { get; }
-            public string ProfilesDirectory { get; }
-            public string LogsDirectory { get; }
-        }
-
         [Test]
         public void Save_Then_Load_Preserves_Hash_In_Unity_Runtime()
         {
